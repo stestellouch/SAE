@@ -6,6 +6,8 @@ using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using System.Collections.Generic;
+
 
 namespace SAE
 {
@@ -23,6 +25,15 @@ namespace SAE
         private int _sensYMC;
         private int _vitesseMC;
 
+        //création des différentes classes
+        private Camera _camera;
+        private Player _player;
+        private List<Component> _components;
+
+        //taille écran pour caméra
+        public static int ScreenHeight;
+        public static int ScreenWidth;
+
 
         public Game1()
         {
@@ -37,6 +48,12 @@ namespace SAE
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _positionMC = new Vector2(0, 0);
 
+
+            
+            ScreenHeight = _graphics.PreferredBackBufferHeight;
+
+            ScreenWidth = _graphics.PreferredBackBufferWidth;
+
             base.Initialize();
         }
 
@@ -48,6 +65,20 @@ namespace SAE
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
+
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _camera = new Camera();
+
+            _player = new Player(Content.Load<Texture2D>("Player"));
+
+            _components = new List<Component>()
+            {
+              _tiledMap = Content.Load<TiledMap>("Tile/Test"),
+              _player              
+            };
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,7 +98,12 @@ namespace SAE
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            _spriteBatch.Begin(transformMatrix: _camera.Transform);
 
+            foreach (var component in _components)
+                component.Draw(gameTime, _spriteBatch);
+
+            _spriteBatch.End();
             // TODO: Add your drawing code here
             _tiledMapRenderer.Draw();
 
