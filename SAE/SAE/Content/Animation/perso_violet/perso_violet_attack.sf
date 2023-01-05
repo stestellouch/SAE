@@ -1,0 +1,29 @@
+{
+  "textureAtlas": {
+    "texture": "P:\\SAE1.01\\perso_violet3.png",
+    "regionWidth": 34,
+    "regionHeight": 31
+  },
+  "cycles": {
+    "haut": {
+      "frames": [9,10,11],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "bas": {
+      "frames": [0,1,2],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "droite": {
+      "frames": [6,7,8],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "gauche": {
+      "frames": [3,4,5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}
