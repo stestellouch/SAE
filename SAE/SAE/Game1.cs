@@ -151,7 +151,7 @@ namespace SAE
                 _Perso.Play("down_swing");
             if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == -1 && _sensPersoX == 0))
                 _Perso.Play("up_swing");
-
+             
 
 
             base.Update(gameTime);
