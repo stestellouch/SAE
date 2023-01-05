@@ -24,7 +24,7 @@ namespace SAE
         private int _sensXMC;
         private int _sensYMC;
         private int _vitesseMC;
-
+        private Camera _camera;
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -46,9 +46,10 @@ namespace SAE
             _sensYMC = 0;
             _sensXMC = 0;
             _vitesseMC = 100;
+            _camera = new Camera();
+            _camera.Zoom = 10f;
+            _camera.Position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
 
-
-            
             _graphics.PreferredBackBufferHeight = 1920;
             _graphics.PreferredBackBufferWidth = 1080;
             _graphics.ApplyChanges();
