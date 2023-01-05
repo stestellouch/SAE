@@ -1,0 +1,29 @@
+{
+  "textureAtlas": {
+    "texture": "P:\\SAE1.01\\_srw_free_character_1-3.6.png",
+    "regionWidth": 65,
+    "regionHeight": 85
+  },
+  "cycles": {
+    "bas": {
+      "frames": [0,1,2],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "gauche": {
+      "frames": [3,4,5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "droite": {
+      "frames": [6,7,8],
+      "isLooping": false,
+      "frameDuration": 0.1
+    },
+    "haut": {
+      "frames": [9,10,11],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}

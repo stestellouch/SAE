@@ -1,0 +1,29 @@
+{
+  "textureAtlas": {
+    "texture": "..\\..\\Tile\\PNG\\character\\free_character_1-3.png",
+    "regionWidth": 16,
+    "regionHeight": 20
+  },
+  "cycles": {
+    "haut": {
+      "frames": [39,40,41],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "bas": {
+      "frames": [3,4,5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "gauche": {
+      "frames": [15,16,17],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "droite": {
+      "frames": [27,28,29],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}
