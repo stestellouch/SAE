@@ -5,74 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using SAE;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE
 {
     public class Camera
     {
-        private float _zoom;
-        private bool _isViewTransformationDirty = true;
-        private Vector2 _position;
-        public float Zoom
+        public static OrthographicCamera _camera;
+        public static Vector2 _cameraPosition;
+
+        public static void Initialise(BoxingViewportAdapter viewportadapter)
         {
-
-            get { return _zoom; }
-            set
-            {
-                _zoom = value;
-                if (_zoom < 0.1f)
-                {
-                    _zoom = 0.1f;
-                }
-                _isViewTransformationDirty = true;
-            }
-
-        }
-        public Vector2 Position
-        {
-            get { return _position; }
-            set
-            {
-                _position = value;
-                _isViewTransformationDirty = true;
-            }
-
+            _camera = new OrthographicCamera(viewportadapter);
+            _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
+            _camera.ZoomIn(1.5f);
         }
 
-        public void SetPosition(Vector2 position)
+        public static void Update()
         {
+            //exterieur
+            _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
 
-            Position = position;
+            //angle a droite
+            if (Perso._positionPerso.X > (Map._mapWidth - Game1.ScreenWidth / 5))
+                _cameraPosition.X = (Map._mapWidth - Game1.ScreenWidth / 5);
+            //angle a gauche
+            if (Perso._positionPerso.X < Game1.ScreenWidth / 5)
+                _cameraPosition.X = Game1.ScreenWidth / 5;
+            //en haut
+            if (Perso._positionPerso.Y < Game1.ScreenHeight / 5)
+                _cameraPosition.Y = Game1.ScreenHeight / 5;
+            //en bas
+            if (Perso._positionPerso.Y > (Map._mapHeight - Game1.ScreenHeight / 5))
+                _cameraPosition.Y = (Map._mapHeight - Game1.ScreenHeight / 5);
+
+            _camera.LookAt(_cameraPosition);
 
         }
-        //public Matrix GetViewTransformationMatrix()
-        //{
-        //    if (_isViewTransformationDirty)
-        //    {
-        //        _camTranslationVector.X = -_position.X;
-        //        _camTranslationVector.Y = -_position.Y;
-
-        //        Matrix.CreateTranslation(ref _camTranslationVector, out _camTranslationMatrix);
-        //        Matrix.CreateRotationZ(_rotation, out _camRotationMatrix);
-
-        //        _camScaleVector.X = _zoom;
-        //        _camScaleVector.Y = _zoom;
-        //        _camScaleVector.Z = 1;
-
-        //        Matrix.CreateScale(ref _camScaleVector, out _camScaleMatrix);
-
-        //        _resTranslationVector.X = ResolutionIndependentRenderer.VirtualWidth * 0.5f;
-        //        _resTranslationVector.Y = ResolutionIndependentRenderer.VirtualHeight * 0.5f;
-        //        _resTranslationVector.Z = 0;
-
-        //        Matrix.CreateTranslation(ref _resTranslationVector, out _resTranslationMatrix);
-
-        //        _transform = _camTranslationMatrix * _camRotationMatrix * _camScaleMatrix * _resTranslationMatrix * ResolutionIndependentRenderer.GetTransformationMatrix();
-        //        _isViewTransformationDirty = false;
-
-        //    }
-        //    return _transform;
-
-        //}
     }
 }

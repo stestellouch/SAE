@@ -7,6 +7,8 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using System.Collections.Generic;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 
 namespace SAE
@@ -24,6 +26,7 @@ namespace SAE
         private int _sensPersoX;
         private int _sensPersoY;
         private int _vitessePerso;
+        
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -49,7 +52,9 @@ namespace SAE
 
             
             _graphics.PreferredBackBufferHeight = 1050;
+            ScreenHeight= _graphics.PreferredBackBufferHeight;
             _graphics.PreferredBackBufferWidth = 1680;
+            ScreenWidth = _graphics.PreferredBackBufferHeight;
             _graphics.ApplyChanges();
 
             //caméra
@@ -148,7 +153,10 @@ namespace SAE
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
+            var transformMatrix = Camera._camera.GetViewMatrix();
+
+            //affichage avec caméra
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
             _spriteBatch.Draw(_Perso, _positionPerso);
