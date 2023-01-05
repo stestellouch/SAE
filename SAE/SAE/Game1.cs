@@ -53,9 +53,9 @@ namespace SAE
 
 
             
-            ScreenHeight = _graphics.PreferredBackBufferHeight;
-
-            ScreenWidth = _graphics.PreferredBackBufferWidth;
+            _graphics.PreferredBackBufferHeight = 1920;
+            _graphics.PreferredBackBufferWidth = 1080;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -98,6 +98,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
             {
                 _sensXMC = 1;
+                _sensYMC = 0;
                 _positionMC.X += _sensXMC * _vitesseMC * deltaTime;
 
             }
@@ -105,6 +106,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
             {
                 _sensXMC = -1;
+                _sensYMC = 0;
                 _positionMC.X += _sensXMC * _vitesseMC * deltaTime;
 
             }
@@ -112,6 +114,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
             {
                 _sensYMC = -1;
+                _sensXMC = 0;
                 _positionMC.Y += _sensYMC * _vitesseMC * deltaTime;
 
             }
@@ -119,6 +122,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
                 _sensYMC = 1;
+                _sensXMC = 0;
                 _positionMC.Y += _sensYMC * _vitesseMC * deltaTime;
 
             }
@@ -130,6 +134,10 @@ namespace SAE
                 _MC.Play("right_Walk");
             else if (_sensXMC == -1 && _sensYMC == 0)
                 _MC.Play("left_Walk");
+            else if (_sensYMC == -1 && _sensXMC == 0)
+                _MC.Play("up_Walk");
+            else if (_sensYMC == 1 && _sensXMC == 0)
+                _MC.Play("down_Walk");
             if (_sensXMC == 0 && _sensYMC == 0)
                 _MC.Play("idle");
 
