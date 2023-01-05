@@ -25,7 +25,6 @@ namespace SAE
         private int _sensPersoY;
         private int _vitessePerso;
 
-
         //taille écran pour caméra
         public static int ScreenHeight;
         public static int ScreenWidth;
