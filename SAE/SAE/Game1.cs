@@ -44,7 +44,7 @@ namespace SAE
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _positionMC = new Vector2(0, 0);
             _sensYMC = 0;
@@ -64,7 +64,7 @@ namespace SAE
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             //SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
@@ -89,7 +89,7 @@ namespace SAE
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            
             _tiledMapRenderer.Update(gameTime);
             _MC.Update(deltaSeconds);
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -106,11 +106,11 @@ namespace SAE
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin(transformMatrix: _camera.Transform);
 
-            foreach (var component in _components)
-                component.Draw(gameTime, _spriteBatch);
+            //foreach (var component in _components)
+            //    component.Draw(gameTime, _spriteBatch);
 
             _spriteBatch.End();
-            // TODO: Add your drawing code here
+            
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
             _spriteBatch.Draw(_MC, _positionMC);
