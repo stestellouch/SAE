@@ -49,7 +49,7 @@ namespace SAE
             _positionMC = new Vector2(0, 0);
             _sensYMC = 0;
             _sensXMC = 0;
-            _vitesseMC = 10;
+            _vitesseMC = 100;
 
 
             
@@ -67,8 +67,8 @@ namespace SAE
             // TODO: use this.Content to load your game content here
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-            //SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
-            //_MC = new AnimatedSprite(SpriteMC);
+            SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
+            _MC = new AnimatedSprite(SpriteMC);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _camera = new Camera();
@@ -94,9 +94,44 @@ namespace SAE
             _MC.Update(deltaSeconds);
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
+            //Si la touche droite est pressé
+            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
+            {
+                _sensXMC = 1;
+                _positionMC.X += _sensXMC * _vitesseMC * deltaTime;
 
-            
+            }
+            //Si la touche gauche est pressé
+            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
+            {
+                _sensXMC = -1;
+                _positionMC.X += _sensXMC * _vitesseMC * deltaTime;
 
+            }
+            //Si la touche haut est pressé
+            if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
+            {
+                _sensYMC = -1;
+                _positionMC.Y += _sensYMC * _vitesseMC * deltaTime;
+
+            }
+            //Si la touche bas est pressé
+            if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
+            {
+                _sensYMC = 1;
+                _positionMC.Y += _sensYMC * _vitesseMC * deltaTime;
+
+            }
+            //######################################################
+            //                      ANIMATION
+            //######################################################
+
+            if (_sensXMC == 1 && _sensYMC == 0)
+                _MC.Play("right_Walk");
+            else if (_sensXMC == -1 && _sensYMC == 0)
+                _MC.Play("left_Walk");
+            if (_sensXMC == 0 && _sensYMC == 0)
+                _MC.Play("idle");
 
             base.Update(gameTime);
         }
@@ -106,8 +141,8 @@ namespace SAE
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin(transformMatrix: _camera.Transform);
 
-            foreach (var component in _components)
-                component.Draw(gameTime, _spriteBatch);
+            //foreach (var component in _components)
+                //component.Draw(gameTime, _spriteBatch);
 
             _spriteBatch.End();
             // TODO: Add your drawing code here
