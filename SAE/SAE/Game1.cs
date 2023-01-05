@@ -128,21 +128,33 @@ namespace SAE
             //                      ANIMATION
             //######################################################
 
-            if (_sensPersoX == 1 && _sensPersoY == 0 )
+            if (_sensPersoX == 1 && _sensPersoY == 0)
+            {
                 _Perso.Play("right_Walk");
+
+            }
             else if (_sensPersoX == -1 && _sensPersoY == 0)
+            {
                 _Perso.Play("left_Walk");
+            }
             else if (_sensPersoY == -1 && _sensPersoX == 0)
+            {
                 _Perso.Play("up_Walk");
+            }
             else if (_sensPersoY == 1 && _sensPersoX == 0)
+            {
                 _Perso.Play("down_Walk");
+            }
             else if (_sensPersoY == 0 && _sensPersoX == 0)
+            {
                 _Perso.Play("idle_down");
+            }
 
 
             //######################################################
             //                      ATTAQUE
             //######################################################
+
             if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == 1 && _sensPersoY == 0))
                 _Perso.Play("right_swing");
             if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == -1 && _sensPersoY == 0))
@@ -151,7 +163,9 @@ namespace SAE
                 _Perso.Play("down_swing");
             if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == -1 && _sensPersoX == 0))
                 _Perso.Play("up_swing");
-             
+
+
+
 
 
             base.Update(gameTime);
