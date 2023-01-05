@@ -33,22 +33,22 @@
     "down_swing": {
       "frames": [3,4,5],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.299999982
     },
     "left_swing": {
       "frames": [15,16,17],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.299999982
     },
     "right_swing": {
       "frames": [27,28,29],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.299999982
     },
     "up_swing": {
       "frames": [39,40,41],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.299999982
     }
   }
 }
