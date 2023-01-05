@@ -163,7 +163,7 @@ namespace SAE
 
             //var transformMatrix = Camera._camera.GetViewMatrix();
 
-            //affichage avec caméra
+            ////affichage avec caméra
             //_spriteBatch.Begin(transformMatrix: transformMatrix);
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
