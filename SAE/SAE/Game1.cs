@@ -25,9 +25,6 @@ namespace SAE
         private int _sensYMC;
         private int _vitesseMC;
 
-        //création des différentes classes
-
-        private List<Component> _components;
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -69,12 +66,6 @@ namespace SAE
             SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
             _MC = new AnimatedSprite(SpriteMC);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            _components = new List<Component>();
-            //{
-            //  _tiledMap = Content.Load<TiledMap>("Tile/Test"),
-            //  _player              
-            //};
 
 
         }
