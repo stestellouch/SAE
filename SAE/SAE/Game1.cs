@@ -75,11 +75,11 @@ namespace SAE
 
             _player = new Player(Content.Load<Texture2D>("Player"));
 
-            _components = new List<Component>()
-            {
-              _tiledMap = Content.Load<TiledMap>("Tile/Test"),
-              _player              
-            };
+            //_components = new List<Component>()
+            //{
+            //  _tiledMap = Content.Load<TiledMap>("Tile/Test"),
+            //  _player              
+            //};
 
 
         }
