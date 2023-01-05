@@ -19,21 +19,32 @@ namespace SAE
 
         public override void Update(GameTime gameTime)
         {
-            var velocity = new Vector2();
+            var sens = new Vector2();
 
-            var speed = 3f;
+            var vitesse = 3f;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-                velocity.Y = -speed;
+            if (Keyboard.GetState().IsKeyDown(Keys.Z))
+            {
+                sens.Y = -vitesse;
+                
+            }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
-                velocity.Y = speed;
+            {
+                sens.Y = vitesse;
+            }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-                velocity.X = -speed;
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            {
+                sens.X = -vitesse;
+            }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                velocity.X = speed;
+            {
+                sens.X = vitesse;
+            }
 
-            Position += velocity;
+            Position += sens;
+
+            
         }
     }
 }

@@ -67,13 +67,13 @@ namespace SAE
             // TODO: use this.Content to load your game content here
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-            SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
-            _MC = new AnimatedSprite(SpriteMC);
+            //SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
+            //_MC = new AnimatedSprite(SpriteMC);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _camera = new Camera();
 
-            _player = new Player(Content.Load<Texture2D>("Player"));
+            //_player = new Player(Content.Load<Texture2D>("Player"));
 
             //_components = new List<Component>()
             //{
