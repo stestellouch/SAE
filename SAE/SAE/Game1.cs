@@ -26,8 +26,7 @@ namespace SAE
         private int _vitesseMC;
 
         //création des différentes classes
-        private Camera _camera;
-        private Player _player;
+
         private List<Component> _components;
 
         //taille écran pour caméra
@@ -71,11 +70,7 @@ namespace SAE
             _MC = new AnimatedSprite(SpriteMC);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _camera = new Camera();
-
-            //_player = new Player(Content.Load<Texture2D>("Player"));
-
-            //_components = new List<Component>()
+            _components = new List<Component>();
             //{
             //  _tiledMap = Content.Load<TiledMap>("Tile/Test"),
             //  _player              
@@ -139,12 +134,7 @@ namespace SAE
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin(transformMatrix: _camera.Transform);
 
-            //foreach (var component in _components)
-                //component.Draw(gameTime, _spriteBatch);
-
-            _spriteBatch.End();
             
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
