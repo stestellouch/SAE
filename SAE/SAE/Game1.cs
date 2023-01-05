@@ -46,6 +46,12 @@ namespace SAE
             _graphics.PreferredBackBufferWidth = 1680;
             _graphics.ApplyChanges();
 
+            //caméra
+            //_camera = new Camera(_resolutionIndependence);
+            //_camera.Zoom = 1f;
+            //_camera.Position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+
+
             base.Initialize();
         }
 
