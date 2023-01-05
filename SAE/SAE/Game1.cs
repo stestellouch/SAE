@@ -19,7 +19,10 @@ namespace SAE
         private float deltaSeconds;
         private Vector2 _positionMC;
         private AnimatedSprite _MC;
-        
+        private int _sensXMC;
+        private int _sensYMC;
+        private int _vitesseMC;
+
 
         public Game1()
         {
@@ -55,6 +58,8 @@ namespace SAE
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
             _MC.Update(deltaSeconds);
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _keyboardState = Keyboard.GetState();
 
             base.Update(gameTime);
         }
