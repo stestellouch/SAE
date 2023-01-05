@@ -232,9 +232,5 @@ namespace SAE
             if (joueur._keyboardState.IsKeyDown(Keys.Space) && (joueur.SensPersoY == -1 && joueur.SensPersoX == 0))
                 joueur._Perso.Play("up_swing");
         }
-        public void SeCharge()
-        {
-
-        }
     }
 }

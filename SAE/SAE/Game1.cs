@@ -19,7 +19,8 @@ namespace SAE
         private TiledMapRenderer _tiledMapRenderer;
         private player mc1;
         private player mc2;
-        
+        public AnimatedSprite _Perso;
+
 
 
         //taille écran pour caméra
@@ -61,7 +62,7 @@ namespace SAE
             SpriteSheet SpriteMC2M = Content.Load<SpriteSheet>("Animation/perso_bleu/perso_bleu_marche.sf", new JsonContentLoader());
             SpriteSheet SpriteMC3A = Content.Load<SpriteSheet>("Animation/perso_violet/perso_violet_attack.sf", new JsonContentLoader());
             SpriteSheet SpriteMC3M = Content.Load<SpriteSheet>("Animation/perso_violet/perso_violet_marche.sf", new JsonContentLoader());*/
-            mc1.Perso = new AnimatedSprite(SpriteMC);
+            mc1._Perso = new AnimatedSprite(SpriteMC);
             //mc2.Perso = new AnimatedSprite(SpriteMC2A);
             //mc2.Perso = new AnimatedSprite(SpriteMC2M);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -90,7 +91,7 @@ namespace SAE
             
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
-            _spriteBatch.Draw(mc1.Perso, mc1.PositionPerso);
+            _spriteBatch.Draw(mc1._Perso, mc1.PositionPerso);
             _spriteBatch.End();
 
             base.Draw(gameTime);
