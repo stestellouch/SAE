@@ -17,11 +17,13 @@ namespace SAE
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        private player mc1;
-        private player mc2;
-        public AnimatedSprite _Perso;
-
-
+        private KeyboardState _keyboardState;
+        private float deltaSeconds;
+        private Vector2 _positionPerso;
+        private AnimatedSprite _Perso;
+        private int _sensPersoX;
+        private int _sensPersoY;
+        private int _vitessePerso;
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -39,13 +41,22 @@ namespace SAE
         {
             
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            player mc1 = new player(1, "joueur 1");
+            _positionPerso = new Vector2(0, 0);
+            _sensPersoY = 0;
+            _sensPersoX = 0;
+            _vitessePerso = 100;
 
 
             
             _graphics.PreferredBackBufferHeight = 1050;
             _graphics.PreferredBackBufferWidth = 1680;
             _graphics.ApplyChanges();
+
+            //caméra
+            //_camera = new Camera(_resolutionIndependence);
+            //_camera.Zoom = 1f;
+            //_camera.Position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+
 
             base.Initialize();
         }
@@ -58,13 +69,7 @@ namespace SAE
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
-            /*SpriteSheet SpriteMC2A = Content.Load<SpriteSheet>("Animation/perso_bleu/perso_bleu_attack.sf", new JsonContentLoader());
-            SpriteSheet SpriteMC2M = Content.Load<SpriteSheet>("Animation/perso_bleu/perso_bleu_marche.sf", new JsonContentLoader());
-            SpriteSheet SpriteMC3A = Content.Load<SpriteSheet>("Animation/perso_violet/perso_violet_attack.sf", new JsonContentLoader());
-            SpriteSheet SpriteMC3M = Content.Load<SpriteSheet>("Animation/perso_violet/perso_violet_marche.sf", new JsonContentLoader());*/
-            mc1._Perso = new AnimatedSprite(SpriteMC);
-            //mc2.Perso = new AnimatedSprite(SpriteMC2A);
-            //mc2.Perso = new AnimatedSprite(SpriteMC2M);
+            _Perso = new AnimatedSprite(SpriteMC);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
@@ -72,15 +77,70 @@ namespace SAE
 
         protected override void Update(GameTime gameTime)
         {
-            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             
             _tiledMapRenderer.Update(gameTime);
-            player.DeplacementMC(mc1, gameTime);
             
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _Perso.Update(deltaTime);
+            _keyboardState = Keyboard.GetState();
+            //Si la touche droite est pressé
+            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
+            {
+                _sensPersoX = 1;
+                _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
+
+            }
+            //Si la touche gauche est pressé
+            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
+            {
+                _sensPersoX = -1;
+                _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
+
+            }
+            //Si la touche haut est pressé
+            if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
+            {
+                _sensPersoY = -1;
+                _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+
+            }
+            //Si la touche bas est pressé
+            if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
+            {
+                _sensPersoY = 1;
+                _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+
+            }
+            //######################################################
+            //                      ANIMATION
+            //######################################################
+
+            if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == 1 && _sensPersoY == -1)
+                _Perso.Play("right_Walk");
+            else if (_sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == -1)
+                _Perso.Play("left_Walk");
+            else if (_sensPersoY == -1 && _sensPersoX == 0)
+                _Perso.Play("up_Walk");
+            else if (_sensPersoY == 1 && _sensPersoX == 0)
+                _Perso.Play("down_Walk");
+            
+            //######################################################
+            //                      ATTAQUE
+            //######################################################
+            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == 1 && _sensPersoY == 0))
+                _Perso.Play("right_swing");
+            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == -1 && _sensPersoY == 0))
+                _Perso.Play("left_swing");
+            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == 1 && _sensPersoX == 0))
+                _Perso.Play("down_swing");
+            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == -1 && _sensPersoX == 0))
+                _Perso.Play("up_swing");
+
+
+
             base.Update(gameTime);
         }
 
@@ -91,7 +151,7 @@ namespace SAE
             
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
-            _spriteBatch.Draw(mc1._Perso, mc1.PositionPerso);
+            _spriteBatch.Draw(_Perso, _positionPerso);
             _spriteBatch.End();
 
             base.Draw(gameTime);
