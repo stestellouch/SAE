@@ -79,8 +79,9 @@ namespace SAE
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            _sensPersoX = 0;
+            _sensPersoY = 0;
 
-            
             _tiledMapRenderer.Update(gameTime);
             
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -90,6 +91,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
             {
                 _sensPersoX = 1;
+                _sensPersoY = 0;
                 _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
             }
@@ -97,6 +99,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
             {
                 _sensPersoX = -1;
+                _sensPersoY = 0;
                 _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
             }
@@ -104,6 +107,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
             {
                 _sensPersoY = -1;
+                _sensPersoX = 0;
                 _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
             }
@@ -111,6 +115,7 @@ namespace SAE
             if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
                 _sensPersoY = 1;
+                _sensPersoX = 0;
                 _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
             }
@@ -118,15 +123,18 @@ namespace SAE
             //                      ANIMATION
             //######################################################
 
-            if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == 1 && _sensPersoY == -1)
+            if (_sensPersoX == 1 && _sensPersoY == 0 )
                 _Perso.Play("right_Walk");
-            else if (_sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == -1)
+            else if (_sensPersoX == -1 && _sensPersoY == 0)
                 _Perso.Play("left_Walk");
             else if (_sensPersoY == -1 && _sensPersoX == 0)
                 _Perso.Play("up_Walk");
             else if (_sensPersoY == 1 && _sensPersoX == 0)
                 _Perso.Play("down_Walk");
-            
+            else if (_sensPersoY == 0 && _sensPersoX == 0)
+                _Perso.Play("idle_down");
+
+
             //######################################################
             //                      ATTAQUE
             //######################################################
