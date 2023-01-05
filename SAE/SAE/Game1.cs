@@ -68,7 +68,7 @@ namespace SAE
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             SpriteSheet SpriteMC = Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
-
+            _MC = new AnimatedSprite(SpriteMC);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _camera = new Camera();
@@ -95,40 +95,7 @@ namespace SAE
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
 
-            //######################################################
-            //                    DEPLACEMENT
-            //######################################################
-            if (_sensYMC == 0 && _sensXMC == 0)
-                _MC.Play("idle");
-
-            //Si la touche droite est pressé
-            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
-            {
-                _sensXMC = 1;
-                _positionMC.X += _sensXMC * _vitesseMC * deltaTime;
-
-            }
-            //Si la touche gauche est pressé
-            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
-            {
-                _sensXMC = -1;
-                _positionMC.X += _sensXMC * _vitesseMC * deltaTime;
-
-            }
-            //Si la touche haut est pressé
-            if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
-            {
-                _sensYMC = -1;
-                _positionMC.Y += _sensYMC * _vitesseMC * deltaTime;
-
-            }
-            //Si la touche bas est pressé
-            if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
-            {
-                _sensYMC = 1;
-                _positionMC.Y += _sensYMC * _vitesseMC * deltaTime;
-
-            }
+            
 
 
             base.Update(gameTime);
