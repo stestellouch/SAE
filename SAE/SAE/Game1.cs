@@ -161,10 +161,10 @@ namespace SAE
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            var transformMatrix = Camera._camera.GetViewMatrix();
+            //var transformMatrix = Camera._camera.GetViewMatrix();
 
             //affichage avec caméra
-            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            //_spriteBatch.Begin(transformMatrix: transformMatrix);
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
             _spriteBatch.Draw(_Perso, _positionPerso);
