@@ -20,7 +20,7 @@ namespace SAE
         
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
-        public List<Sprite> Monstres;
+        public Monstres monstres = new Monstres();
 
 
 
@@ -56,7 +56,7 @@ namespace SAE
             World.Initialize();
             
             //création de liste des sprite
-            Monstres = new List<Sprite>();
+            
 
             //création de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
@@ -101,6 +101,7 @@ namespace SAE
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             World.Draw(transformMatrix);
             Perso.Draw(_spriteBatch);
+            Monstres.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
