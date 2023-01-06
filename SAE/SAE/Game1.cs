@@ -24,8 +24,10 @@ namespace SAE
         private Perso mainCharacter1;
         private Perso mainCharacter2;
         private int _num;
-        
-        
+        private Camera _camera;
+
+
+
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -55,8 +57,10 @@ namespace SAE
             _graphics.PreferredBackBufferWidth = 1680;
             ScreenWidth = _graphics.PreferredBackBufferHeight;
             _graphics.ApplyChanges();
+            _camera = new Camera();
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
+            _camera.Initialize(viewportadapter);
 
-            
             base.Initialize();
         }
 
@@ -85,7 +89,7 @@ namespace SAE
 
             mainCharacter1.Update(gameTime, _num);
             mainCharacter2.Update(gameTime, _num);
-
+            _camera.Update(gameTime);
             base.Update(gameTime);
         }
 
