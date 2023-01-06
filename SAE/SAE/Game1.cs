@@ -22,6 +22,7 @@ namespace SAE
         private KeyboardState _keyboardState;
         private float deltaSeconds;
         private Perso mainCharacter1;
+        private Perso mainCharacter2;
         
         
 
@@ -44,6 +45,8 @@ namespace SAE
 
             mainCharacter1 = new Perso();
             mainCharacter1.Initialize();
+            mainCharacter2 = new Perso();
+            mainCharacter2.Initialize();
            
             _graphics.PreferredBackBufferHeight = 1050;
             ScreenHeight= _graphics.PreferredBackBufferHeight;
@@ -64,8 +67,8 @@ namespace SAE
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            mainCharacter1.LoadContent(this);
-            
+            mainCharacter1.LoadContent(this, 1);
+            mainCharacter2.LoadContent(this, 2);
             _tiledMap = Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -84,6 +87,7 @@ namespace SAE
             _keyboardState = Keyboard.GetState();
 
             mainCharacter1.Update(gameTime);
+            mainCharacter2.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -99,6 +103,7 @@ namespace SAE
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
             mainCharacter1.Draw(_spriteBatch);
+            mainCharacter2.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

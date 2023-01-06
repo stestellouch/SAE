@@ -34,10 +34,20 @@ namespace SAE
             _vitessePerso = 100;
             _sens = "nothing";
         }
-        public void LoadContent(Game game)
+        public void LoadContent(Game game, int numJoueur)
         {
-            SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
-            _Perso = new AnimatedSprite(SpriteMC);
+            if (numJoueur == 1)
+            {
+                SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
+                _Perso = new AnimatedSprite(SpriteMC);
+            }
+            else if (numJoueur == 2)
+            {
+                SpriteSheet SpriteMC2A = game.Content.Load<SpriteSheet>("Animation/perso_bleu/perso_bleu_attack.sf", new JsonContentLoader());
+                SpriteSheet SpriteMC2M = game.Content.Load<SpriteSheet>("Animation/perso_bleu/perso_bleu_marche.sf", new JsonContentLoader());
+                _Perso = new AnimatedSprite(SpriteMC2A);
+                _Perso = new AnimatedSprite(SpriteMC2M);
+            }
         }
         public void Update(GameTime gameTime)
         {
@@ -49,6 +59,7 @@ namespace SAE
             _Perso.Update(deltaTime);
             _keyboardState = Keyboard.GetState();
 
+            
             //Si la touche droite est pressé
             if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
