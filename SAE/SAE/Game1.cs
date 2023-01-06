@@ -26,6 +26,7 @@ namespace SAE
         private int _sensPersoX;
         private int _sensPersoY;
         private int _vitessePerso;
+        private string _sens;
         
 
         //taille écran pour caméra
@@ -48,6 +49,7 @@ namespace SAE
             _sensPersoY = 0;
             _sensPersoX = 0;
             _vitessePerso = 100;
+            _sens = "nothing";
 
 
             
@@ -93,18 +95,20 @@ namespace SAE
             _Perso.Update(deltaTime);
             _keyboardState = Keyboard.GetState();
             //Si la touche droite est pressé
-            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
+            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
                 _sensPersoX = 1;
                 _sensPersoY = 0;
+                _sens = "droite";
                 _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
             }
             //Si la touche gauche est pressé
-            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
+            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
                 _sensPersoX = -1;
                 _sensPersoY = 0;
+                _sens = "gauche";
                 _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
             }
@@ -113,6 +117,7 @@ namespace SAE
             {
                 _sensPersoY = -1;
                 _sensPersoX = 0;
+                _sens = "haut";
                 _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
             }
@@ -121,6 +126,7 @@ namespace SAE
             {
                 _sensPersoY = 1;
                 _sensPersoX = 0;
+                _sens = "bas";
                 _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
             }
@@ -147,7 +153,10 @@ namespace SAE
             }
             else if (_sensPersoY == 0 && _sensPersoX == 0)
             {
-                _Perso.Play("idle_down");
+                if (_sens == "bas") _Perso.Play("idle_down");
+                else if (_sens == "haut") _Perso.Play("idle_up");
+                else if (_sens == "droite") _Perso.Play("idle_right");
+                else if (_sens == "left") _Perso.Play("idle_left");
             }
 
 
