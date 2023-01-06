@@ -28,6 +28,7 @@ namespace SAE
 
         public void Initialize()
         {
+            
             _positionPerso = new Vector2(100, 100);
             _sensPersoY = 0;
             _sensPersoX = 0;
@@ -49,7 +50,7 @@ namespace SAE
                 _Perso = new AnimatedSprite(SpriteMC2M);
             }
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, int numJoueur)
         {
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -59,85 +60,154 @@ namespace SAE
             _Perso.Update(deltaTime);
             _keyboardState = Keyboard.GetState();
 
-            
-            //Si la touche droite est pressé
-            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
+            if (numJoueur == 1)
             {
-                _sensPersoX = 1;
-                _sensPersoY = 0;
-                _sens = "droite";
-                _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
+                //Si la touche droite est pressé
+                if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)) && !(_keyboardState.IsKeyDown(Keys.S)) && !(_keyboardState.IsKeyDown(Keys.Z)))
+                {
+                    _sensPersoX = 1;
+                    _sensPersoY = 0;
+                    _sens = "droite";
+                    _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
+                }
+                //Si la touche gauche est pressé
+                if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)) && !(_keyboardState.IsKeyDown(Keys.S)) && !(_keyboardState.IsKeyDown(Keys.Z)))
+                {
+                    _sensPersoX = -1;
+                    _sensPersoY = 0;
+                    _sens = "gauche";
+                    _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
+
+                }
+                //Si la touche haut est pressé
+                if (_keyboardState.IsKeyDown(Keys.Z) && !(_keyboardState.IsKeyDown(Keys.S)))
+                {
+                    _sensPersoY = -1;
+                    _sensPersoX = 0;
+                    _sens = "haut";
+                    _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+
+                }
+                //Si la touche bas est pressé
+                if (_keyboardState.IsKeyDown(Keys.S) && !(_keyboardState.IsKeyDown(Keys.Z)))
+                {
+                    _sensPersoY = 1;
+                    _sensPersoX = 0;
+                    _sens = "bas";
+                    _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+
+                }
+                //######################################################
+                //                      ANIMATION
+                //######################################################
+
+                if (_sensPersoX == 1 && _sensPersoY == 0)
+                {
+                    _Perso.Play("right_Walk");
+
+                }
+                else if (_sensPersoX == -1 && _sensPersoY == 0)
+                {
+                    _Perso.Play("left_Walk");
+                }
+                else if (_sensPersoY == -1 && _sensPersoX == 0)
+                {
+                    _Perso.Play("up_Walk");
+                }
+                else if (_sensPersoY == 1 && _sensPersoX == 0)
+                {
+                    _Perso.Play("down_Walk");
+                }
+                else if (_sensPersoY == 0 && _sensPersoX == 0)
+                {
+                    if (_sens == "bas") _Perso.Play("idle_down");
+                    else if (_sens == "haut") _Perso.Play("idle_up");
+                    else if (_sens == "droite") _Perso.Play("idle_right");
+                    else if (_sens == "left") _Perso.Play("idle_left");
+                }
+
+
+                //######################################################
+                //                      ATTAQUE
+                //######################################################
+
+                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == 1 && _sensPersoY == 0))
+                    _Perso.Play("right_swing");
+                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == -1 && _sensPersoY == 0))
+                    _Perso.Play("left_swing");
+                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == 1 && _sensPersoX == 0))
+                    _Perso.Play("down_swing");
+                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == -1 && _sensPersoX == 0))
+                    _Perso.Play("up_swing");
             }
-            //Si la touche gauche est pressé
-            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
+            if (numJoueur == 2)
             {
-                _sensPersoX = -1;
-                _sensPersoY = 0;
-                _sens = "gauche";
-                _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
+                //Si la touche droite est pressé
+                if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
+                {
+                    _sensPersoX = 1;
+                    _sensPersoY = 0;
+                    _sens = "droite";
+                    _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
-            }
-            //Si la touche haut est pressé
-            if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
-            {
-                _sensPersoY = -1;
-                _sensPersoX = 0;
-                _sens = "haut";
-                _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+                }
+                //Si la touche gauche est pressé
+                if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)) && !(_keyboardState.IsKeyDown(Keys.Down)) && !(_keyboardState.IsKeyDown(Keys.Up)))
+                {
+                    _sensPersoX = -1;
+                    _sensPersoY = 0;
+                    _sens = "gauche";
+                    _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
 
-            }
-            //Si la touche bas est pressé
-            if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
-            {
-                _sensPersoY = 1;
-                _sensPersoX = 0;
-                _sens = "bas";
-                _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+                }
+                //Si la touche haut est pressé
+                if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
+                {
+                    _sensPersoY = -1;
+                    _sensPersoX = 0;
+                    _sens = "haut";
+                    _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
-            }
-            //######################################################
-            //                      ANIMATION
-            //######################################################
+                }
+                //Si la touche bas est pressé
+                if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
+                {
+                    _sensPersoY = 1;
+                    _sensPersoX = 0;
+                    _sens = "bas";
+                    _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
-            if (_sensPersoX == 1 && _sensPersoY == 0)
-            {
-                _Perso.Play("right_Walk");
+                }
+                //######################################################
+                //                      ANIMATION
+                //######################################################
 
-            }
-            else if (_sensPersoX == -1 && _sensPersoY == 0)
-            {
-                _Perso.Play("left_Walk");
-            }
-            else if (_sensPersoY == -1 && _sensPersoX == 0)
-            {
-                _Perso.Play("up_Walk");
-            }
-            else if (_sensPersoY == 1 && _sensPersoX == 0)
-            {
-                _Perso.Play("down_Walk");
-            }
-            else if (_sensPersoY == 0 && _sensPersoX == 0)
-            {
-                if (_sens == "bas") _Perso.Play("idle_down");
-                else if (_sens == "haut") _Perso.Play("idle_up");
-                else if (_sens == "droite") _Perso.Play("idle_right");
-                else if (_sens == "left") _Perso.Play("idle_left");
-            }
+                if (_sensPersoX == 1 && _sensPersoY == 0)
+                {
+                    _Perso.Play("right");
 
-
-            //######################################################
-            //                      ATTAQUE
-            //######################################################
-
-            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == 1 && _sensPersoY == 0))
-                _Perso.Play("right_swing");
-            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == -1 && _sensPersoY == 0))
-                _Perso.Play("left_swing");
-            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == 1 && _sensPersoX == 0))
-                _Perso.Play("down_swing");
-            if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == -1 && _sensPersoX == 0))
-                _Perso.Play("up_swing");
+                }
+                else if (_sensPersoX == -1 && _sensPersoY == 0)
+                {
+                    _Perso.Play("left");
+                }
+                else if (_sensPersoY == -1 && _sensPersoX == 0)
+                {
+                    _Perso.Play("up");
+                }
+                else if (_sensPersoY == 1 && _sensPersoX == 0)
+                {
+                    _Perso.Play("down");
+                }
+                else if (_sensPersoY == 0 && _sensPersoX == 0)
+                {
+                    if (_sens == "bas") _Perso.Play("idle_down");
+                    else if (_sens == "haut") _Perso.Play("idle_up");
+                    else if (_sens == "droite") _Perso.Play("idle_right");
+                    else if (_sens == "left") _Perso.Play("idle_left");
+                }
+            }
         }
         public void Draw(SpriteBatch _spriteBatch)
         {
