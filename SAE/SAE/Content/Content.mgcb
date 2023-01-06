@@ -1,9 +1,9 @@
 
 #----------------------------- Global Properties ----------------------------#
 
-/outputDir:bin/$(Platform)
-/intermediateDir:obj/$(Platform)
-/platform:DesktopGL
+/outputDir:bin
+/intermediateDir:obj
+/platform:Windows
 /config:
 /profile:Reach
 /compress:False
@@ -222,6 +222,30 @@
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/doors/free_doors2.png
 
+#begin Tile/PNG/Exterior/_srw_tileset_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/Exterior/_srw_tileset_0.png
+
+#begin Tile/PNG/Exterior/atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/Exterior/atlas.png
+
 #begin Tile/PNG/fire/$_srw_free_campfire.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -414,6 +438,18 @@
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/lava/free_lavafall_tiles2.png
 
+#begin Tile/PNG/mapGeneraleTuiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/mapGeneraleTuiles.png
+
 #begin Tile/PNG/monster/_srw_free_monsters_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -437,6 +473,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/monster/free_monsters_0.png
+
+#begin Tile/PNG/perso.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/perso.png
 
 #begin Tile/PNG/tileset/!$_srw_free_traps1.png
 /importer:TextureImporter
