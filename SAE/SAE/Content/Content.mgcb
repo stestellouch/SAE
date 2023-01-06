@@ -1,4 +1,4 @@
-
+dd
 #----------------------------- Global Properties ----------------------------#
 
 /outputDir:bin/$(Platform)
@@ -18,6 +18,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Animation/MC.sf
+/importer:SpriteFactoryContentImporter
+/processor:SpriteFactoryContentProcessor
+/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
+/build:Animation/MC.sf
+
 #begin Animation/perso_bleu/_srw_free_character_1-3.6.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -29,6 +35,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Animation/perso_bleu/_srw_free_character_1-3.6.png
+
+#begin Animation/perso_bleu/perso_bleu_attack.sf
+/importer:SpriteFactoryContentImporter
+/processor:SpriteFactoryContentProcessor
+/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
+/build:Animation/perso_bleu/perso_bleu_attack.sf
+
+#begin Animation/perso_bleu/perso_bleu_marche.sf
+/importer:SpriteFactoryContentImporter
+/processor:SpriteFactoryContentProcessor
+/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
+/build:Animation/perso_bleu/perso_bleu_marche.sf
+
+#begin Animation/perso_violet/perso_violet_attack.sf
+/importer:SpriteFactoryContentImporter
+/processor:SpriteFactoryContentProcessor
+/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
+/build:Animation/perso_violet/perso_violet_attack.sf
+
+#begin Animation/perso_violet/perso_violet_walk.sf
+/importer:SpriteFactoryContentImporter
+/processor:SpriteFactoryContentProcessor
+/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
+/build:Animation/perso_violet/perso_violet_walk.sf
 
 #begin Animation/perso_violet/perso_violet3.png
 /importer:TextureImporter
@@ -222,6 +252,30 @@
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/doors/free_doors2.png
 
+#begin Tile/PNG/Exterior/_srw_tileset_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/Exterior/_srw_tileset_0.png
+
+#begin Tile/PNG/Exterior/atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/Exterior/atlas.png
+
 #begin Tile/PNG/fire/$_srw_free_campfire.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -414,6 +468,18 @@
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/lava/free_lavafall_tiles2.png
 
+#begin Tile/PNG/mapGeneraleTuiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/mapGeneraleTuiles.png
+
 #begin Tile/PNG/monster/_srw_free_monsters_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -437,6 +503,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/monster/free_monsters_0.png
+
+#begin Tile/PNG/perso.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/perso.png
 
 #begin Tile/PNG/tileset/!$_srw_free_traps1.png
 /importer:TextureImporter
@@ -713,6 +791,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/water/free_waterfall_tiles1.png
+
+#begin Tile/Test.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tile/Test.tmx
 
 #begin Tile/Test.tmx
 /importer:TiledMapImporter
