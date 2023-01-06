@@ -27,18 +27,18 @@ namespace SAE
             //exterieur
             _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
 
-            ////angle a droite
-            //if (Perso._positionPerso.X > (Map._mapWidth - Game1.ScreenWidth / 5))
-            //    _cameraPosition.X = (Map._mapWidth - Game1.ScreenWidth / 5);
-            ////angle a gauche
-            //if (Perso._positionPerso.X < Game1.ScreenWidth / 5)
-            //    _cameraPosition.X = Game1.ScreenWidth / 5;
-            ////en haut
-            //if (Perso._positionPerso.Y < Game1.ScreenHeight / 5)
-            //    _cameraPosition.Y = Game1.ScreenHeight / 5;
-            ////en bas
-            //if (Perso._positionPerso.Y > (Map._mapHeight - Game1.ScreenHeight / 5))
-            //    _cameraPosition.Y = (Map._mapHeight - Game1.ScreenHeight / 5);
+            //angle a droite
+            if (Perso._positionPerso.X > (World._mapWidth - Game1.ScreenWidth / 5))
+                _cameraPosition.X = (World._mapWidth - Game1.ScreenWidth / 5);
+            //angle a gauche
+            if (Perso._positionPerso.X < Game1.ScreenWidth / 5)
+                _cameraPosition.X = Game1.ScreenWidth / 5;
+            //en haut
+            if (Perso._positionPerso.Y < Game1.ScreenHeight / 5)
+                _cameraPosition.Y = Game1.ScreenHeight / 5;
+            //en bas
+            if (Perso._positionPerso.Y > (World._mapHeight - Game1.ScreenHeight / 5))
+                _cameraPosition.Y = (World._mapHeight - Game1.ScreenHeight / 5);
              _camera.LookAt(_cameraPosition);
 
         }

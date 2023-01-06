@@ -17,14 +17,14 @@ namespace SAE
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private TiledMap _tiledMap;
-        private TiledMapRenderer _tiledMapRenderer;
+        
         private KeyboardState _keyboardState;
         private float deltaSeconds;
         private Perso mainCharacter1;
         private Perso mainCharacter2;
         private int _num;
         private Camera _camera;
+        private World _world;
 
 
 
@@ -60,6 +60,7 @@ namespace SAE
             _camera = new Camera();
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
             _camera.Initialize(viewportadapter);
+            _world = new World();
 
             base.Initialize();
         }
@@ -67,11 +68,10 @@ namespace SAE
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            _world.LoadContent(this);
             mainCharacter1.LoadContent(this, _num);
             mainCharacter2.LoadContent(this, _num);
-            _tiledMap = Content.Load<TiledMap>("Tile/Test");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
@@ -81,8 +81,7 @@ namespace SAE
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            _tiledMapRenderer.Update(gameTime);
+            _world.Update(gameTime);           
             
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
@@ -101,13 +100,11 @@ namespace SAE
 
             //affichage avec caméra
             //_spriteBatch.Begin();
-            _tiledMapRenderer.Draw();
+            _world.Draw();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-
             mainCharacter1.Draw(_spriteBatch);
             mainCharacter2.Draw(_spriteBatch);
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
