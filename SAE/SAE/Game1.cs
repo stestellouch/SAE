@@ -95,16 +95,43 @@ namespace SAE
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds; // DeltaTime
             float walkSpeed = deltaSeconds * Perso._vitessePerso; // Vitesse de déplacement du sprite
             KeyboardState keyboardState = Keyboard.GetState();
-            String animation = "idle_down";
-            if (keyboardState.IsKeyDown(Keys.Z))
-            {
-                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
-                animation = "walkNorth";
-                if (!IsCollision(tx, ty))
-                    Perso._positionPerso.Y -= walkSpeed;
+            //String animation = "idle";
+            //if (keyboardState.IsKeyDown(Keys.Z))
+            //{
+            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
+            //    animation = "walkNorth";
+            //    if (!IsCollision(tx, ty))
+            //        Perso._positionPerso.Y -= walkSpeed;
                 
-            }
+            //}
+            //else if (keyboardState.IsKeyDown(Keys.S))
+            //{
+            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
+            //    animation = "walkSouth";
+            //    if (!IsCollision(tx, ty))
+            //        Perso._positionPerso.Y += walkSpeed;
+
+            //}
+            //else if (keyboardState.IsKeyDown(Keys.D))
+            //{
+            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
+            //    animation = "walkEast";
+            //    if (!IsCollision(tx, ty))
+            //        Perso._positionPerso.X += walkSpeed;
+
+            //}
+            //else if (keyboardState.IsKeyDown(Keys.Q))
+            //{
+            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
+            //    animation = "walkNorth";
+            //    if (!IsCollision(tx, ty))
+            //        Perso._positionPerso.X -= walkSpeed;
+
+            //}
 
             base.Update(gameTime);
         }
@@ -123,16 +150,19 @@ namespace SAE
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
-        }
+        //private bool IsCollision(ushort x, ushort y)
+        //{
+        //    // définition de tile qui peut être null (?)
+        //    TiledMapTile? tile;
+        //    if (mapLayer.TryGetTile(x, y, out tile) == false)
+        //    {
+        //        return false;
+        //    }
+
+        //    if (!tile.Value.IsBlank)
+        //        return true;
+        //    return false;
+        //}
 
 
     }
