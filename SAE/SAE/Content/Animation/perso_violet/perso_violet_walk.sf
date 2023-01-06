@@ -5,23 +5,43 @@
     "regionHeight": 20
   },
   "cycles": {
-    "bas": {
+    "down": {
       "frames": [6,7,8],
       "isLooping": false,
       "frameDuration": 0.2
     },
-    "haut": {
+    "up": {
       "frames": [42,43,44],
       "isLooping": false,
       "frameDuration": 0.2
     },
-    "gauche": {
+    "left": {
       "frames": [18,19,20],
       "isLooping": false,
       "frameDuration": 0.2
     },
-    "droite": {
+    "right": {
       "frames": [30,31,32],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idle_right": {
+      "frames": [31],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idle_left": {
+      "frames": [19],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idle_up": {
+      "frames": [43],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idle_down": {
+      "frames": [7],
       "isLooping": false,
       "frameDuration": 0.2
     }
