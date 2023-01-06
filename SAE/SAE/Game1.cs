@@ -70,8 +70,7 @@ namespace SAE
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             World.LoadContent(this);
             Perso.LoadContent(this);
-            
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            //Monstres.LoadContent(this);
 
 
         }
