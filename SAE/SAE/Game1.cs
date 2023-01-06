@@ -9,7 +9,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using System.Collections.Generic;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
-
+using System;
 
 namespace SAE
 {
@@ -21,6 +21,8 @@ namespace SAE
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
         public List<Sprite> Monstres;
+
+        public static TiledMapTileLayer mapLayer;
 
 
 
@@ -70,7 +72,8 @@ namespace SAE
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             World.LoadContent(this);
             Perso.LoadContent(this);
-            
+            mapLayer = World._tiledMap.GetLayer<TiledMapTileLayer>("obstacles");
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
@@ -88,6 +91,21 @@ namespace SAE
             Perso.Update(gameTime);
             
             Camera.Update(gameTime);
+
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds; // DeltaTime
+            float walkSpeed = deltaSeconds * Perso._vitessePerso; // Vitesse de déplacement du sprite
+            KeyboardState keyboardState = Keyboard.GetState();
+            String animation = "idle_down";
+            if (keyboardState.IsKeyDown(Keys.Z))
+            {
+                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
+                animation = "walkNorth";
+                if (!IsCollision(tx, ty))
+                    Perso._positionPerso.Y -= walkSpeed;
+                
+            }
+
             base.Update(gameTime);
         }
 
@@ -104,6 +122,16 @@ namespace SAE
             Perso.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
+        }
+        private bool IsCollision(ushort x, ushort y)
+        {
+            // définition de tile qui peut être null (?)
+            TiledMapTile? tile;
+            if (mapLayer.TryGetTile(x, y, out tile) == false)
+                return false;
+            if (!tile.Value.IsBlank)
+                return true;
+            return false;
         }
 
 

@@ -57,8 +57,8 @@ namespace SAE
             
             
                 //Si la touche droite est pressé
-                if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)) && !(_keyboardState.IsKeyDown(Keys.S)) && !(_keyboardState.IsKeyDown(Keys.Z)))
-                {
+                if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)))
+                { 
                     _sensPersoX = 1;
                     _sensPersoY = 0;
                     _sens = "droite";
@@ -66,7 +66,7 @@ namespace SAE
 
                 }
                 //Si la touche gauche est pressé
-                if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)) && !(_keyboardState.IsKeyDown(Keys.S)) && !(_keyboardState.IsKeyDown(Keys.Z)))
+                if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)))
                 {
                     _sensPersoX = -1;
                     _sensPersoY = 0;
