@@ -29,8 +29,8 @@ namespace SAE
         
 
         //taille écran pour caméra
-        public static int ScreenHeight;
-        public static int ScreenWidth;
+        public int ScreenHeight;
+        public int ScreenWidth;
 
 
         public Game1()
@@ -57,12 +57,7 @@ namespace SAE
             ScreenWidth = _graphics.PreferredBackBufferHeight;
             _graphics.ApplyChanges();
 
-            //caméra
-            //_camera = new Camera(_resolutionIndependence);
-            //_camera.Zoom = 1f;
-            //_camera.Position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
-
-
+            
             base.Initialize();
         }
 
@@ -175,10 +170,11 @@ namespace SAE
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //var transformMatrix = Camera._camera.GetViewMatrix();
+            var transformMatrix = Camera._camera.GetViewMatrix();
 
-            ////affichage avec caméra
-            //_spriteBatch.Begin(transformMatrix: transformMatrix);
+            //affichage avec caméra
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
             _spriteBatch.Draw(_Perso, _positionPerso);
