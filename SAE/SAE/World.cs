@@ -13,31 +13,31 @@ namespace SAE
 {
     internal class World
     {
-        private TiledMap _tiledMap;
-        private TiledMapRenderer _tiledMapRenderer;
+        public static TiledMap _tiledMap;
+        public static TiledMapRenderer _tiledMapRenderer;
         public static int _mapWidth;
         public static int _mapHeight;
 
-        public void Initialize()
+        public static void Initialize()
         {
-            _mapWidth = 0;
-            _mapHeight = 0;
+            _mapWidth = 1600;
+            _mapHeight = 1600;
 
         }
-        public void LoadContent(Game game)
+        public static void LoadContent(Game game)
         {
             _tiledMap = game.Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(game.GraphicsDevice, _tiledMap);
         }
-        public void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime)
         {
             _tiledMapRenderer.Update(gameTime);
 
 
         }
-        public void Draw()
+        public static void Draw(Matrix transformMatrix)
         {
-            _tiledMapRenderer.Draw();
+            _tiledMapRenderer.Draw(transformMatrix);
 
         }
 

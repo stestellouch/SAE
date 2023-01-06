@@ -15,16 +15,14 @@ namespace SAE
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public static GraphicsDeviceManager _graphics;
+        public static SpriteBatch _spriteBatch;
+                
+        public  KeyboardState _keyboardState;
+        public static float deltaSeconds;
         
-        private KeyboardState _keyboardState;
-        private float deltaSeconds;
-        private Perso mainCharacter1;
-        private Perso mainCharacter2;
-        private int _num;
-        private Camera _camera;
-        private World _world;
+        public static int _num;
+        
 
 
 
@@ -45,32 +43,28 @@ namespace SAE
         {
 
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            _num = 0;
-            mainCharacter1 = new Perso();
-            mainCharacter1.Initialize();
-            _num += 1;
-            mainCharacter2 = new Perso();
-            mainCharacter2.Initialize();
+                       
+            Perso.Initialize();
+                       
            
-            _graphics.PreferredBackBufferHeight = 1050;
+            _graphics.PreferredBackBufferHeight = 900;
             ScreenHeight= _graphics.PreferredBackBufferHeight;
-            _graphics.PreferredBackBufferWidth = 1680;
+            _graphics.PreferredBackBufferWidth = 1480;
             ScreenWidth = _graphics.PreferredBackBufferHeight;
             _graphics.ApplyChanges();
-            _camera = new Camera();
+            
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
-            _camera.Initialize(viewportadapter);
-            _world = new World();
+            World.Initialize();
 
+            Camera.Initialize(viewportadapter);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _world.LoadContent(this);
-            mainCharacter1.LoadContent(this, _num);
-            mainCharacter2.LoadContent(this, _num);
+            World.LoadContent(this);
+            Perso.LoadContent(this);
             
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -81,14 +75,14 @@ namespace SAE
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            _world.Update(gameTime);           
+            World.Update(gameTime);           
             
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
 
-            mainCharacter1.Update(gameTime, _num);
-            mainCharacter2.Update(gameTime, _num);
-            _camera.Update(gameTime);
+            Perso.Update(gameTime);
+            
+            Camera.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -100,10 +94,9 @@ namespace SAE
 
             //affichage avec caméra
             //_spriteBatch.Begin();
-            _world.Draw();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-            mainCharacter1.Draw(_spriteBatch);
-            mainCharacter2.Draw(_spriteBatch);
+            World.Draw(transformMatrix);
+            Perso.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

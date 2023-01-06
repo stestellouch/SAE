@@ -10,19 +10,19 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE
 {
-    public  class Camera
+    public static class Camera
     {
         public static OrthographicCamera _camera;
         public static Vector2 _cameraPosition;
 
-        public void Initialize(BoxingViewportAdapter viewportadapter)
+        public static void Initialize(BoxingViewportAdapter viewportadapter)
         {
             _camera = new OrthographicCamera(viewportadapter);
             _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
             _camera.ZoomIn(1.5f);
         }
 
-        public void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime)
         {
             //exterieur
             _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
