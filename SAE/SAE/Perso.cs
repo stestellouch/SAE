@@ -29,7 +29,7 @@ namespace SAE
         public static void Initialize()
         {
             
-            _positionPerso = new Vector2(100, 100);
+            _positionPerso = new Vector2(250,250);
             _sensPersoY = 0;
             _sensPersoX = 0;
             _vitessePerso = 100;
