@@ -22,12 +22,12 @@ namespace SAE
         private KeyboardState _keyboardState;
         private float deltaSeconds;
         private Perso mainCharacter1;
-        
-        
+        private Camera _camera;
+
 
         //taille écran pour caméra
-        public int ScreenHeight;
-        public int ScreenWidth;
+        public static int ScreenHeight;
+        public static int ScreenWidth;
 
 
         public Game1()
@@ -39,11 +39,14 @@ namespace SAE
 
         protected override void Initialize()
         {
-            
+
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
 
             mainCharacter1 = new Perso();
             mainCharacter1.Initialize();
+            _camera = new Camera();
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight); 
+            _camera.Initialize(viewportadapter);
            
             _graphics.PreferredBackBufferHeight = 1050;
             ScreenHeight= _graphics.PreferredBackBufferHeight;
@@ -79,6 +82,8 @@ namespace SAE
             _keyboardState = Keyboard.GetState();
 
             mainCharacter1.Update(gameTime);
+            _camera.Update(gameTime);
+
 
             base.Update(gameTime);
         }
@@ -90,10 +95,10 @@ namespace SAE
             var transformMatrix = Camera._camera.GetViewMatrix();
 
             //affichage avec caméra
+            //_spriteBatch.Begin();
+            _tiledMapRenderer.Draw();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw();
-            _spriteBatch.Begin();
             mainCharacter1.Draw(_spriteBatch);
             _spriteBatch.End();
 

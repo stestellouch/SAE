@@ -18,7 +18,7 @@ namespace SAE
 {
     internal class Perso
     {
-        private Vector2 _positionPerso;
+        public static Vector2 _positionPerso;
         private AnimatedSprite _Perso;
         private int _sensPersoX;
         private int _sensPersoY;
