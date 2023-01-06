@@ -17,6 +17,7 @@ namespace SAE
         public static TiledMapRenderer _tiledMapRenderer;
         public static int _mapWidth;
         public static int _mapHeight;
+        
 
         public static void Initialize()
         {
