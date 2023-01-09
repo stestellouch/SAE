@@ -17,7 +17,8 @@ namespace SAE
         public static TiledMapRenderer _tiledMapRenderer;
         public static int _mapWidth;
         public static int _mapHeight;
-        
+        public static TiledMapTileLayer mapLayer;
+
 
         public static void Initialize()
         {
@@ -29,6 +30,7 @@ namespace SAE
         {
             _tiledMap = game.Content.Load<TiledMap>("Tile/Test");
             _tiledMapRenderer = new TiledMapRenderer(game.GraphicsDevice, _tiledMap);
+            mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("obstacles");
         }
         public static void Update(GameTime gameTime)
         {
