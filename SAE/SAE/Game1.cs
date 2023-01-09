@@ -20,10 +20,10 @@ namespace SAE
         
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
-        public Monstres monstres = new Monstres();
+        //public Monstres monstres = new Monstres();
+        public TiledMapTileLayer mapLayer;
 
-        public static TiledMapTileLayer mapLayer;
-
+       
 
 
 
@@ -95,43 +95,55 @@ namespace SAE
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds; // DeltaTime
             float walkSpeed = deltaSeconds * Perso._vitessePerso; // Vitesse de déplacement du sprite
             KeyboardState keyboardState = Keyboard.GetState();
-            //String animation = "idle";
-            //if (keyboardState.IsKeyDown(Keys.Z))
-            //{
-            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
-            //    animation = "walkNorth";
-            //    if (!IsCollision(tx, ty))
-            //        Perso._positionPerso.Y -= walkSpeed;
-                
-            //}
-            //else if (keyboardState.IsKeyDown(Keys.S))
-            //{
-            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
-            //    animation = "walkSouth";
-            //    if (!IsCollision(tx, ty))
-            //        Perso._positionPerso.Y += walkSpeed;
+            
+           
+            String animation = "idle";
+        
+            if (keyboardState.IsKeyDown(Keys.Z))
+            {
+                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight);
+                animation = "walkNorth";
+                if (!IsCollision(tx, ty))
+                    Perso._positionPerso.Y -= walkSpeed;
+                else
+                    Perso._positionPerso.Y += 1;
 
-            //}
-            //else if (keyboardState.IsKeyDown(Keys.D))
-            //{
-            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
-            //    animation = "walkEast";
-            //    if (!IsCollision(tx, ty))
-            //        Perso._positionPerso.X += walkSpeed;
 
-            //}
-            //else if (keyboardState.IsKeyDown(Keys.Q))
-            //{
-            //    ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-            //    ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight - 1);
-            //    animation = "walkNorth";
-            //    if (!IsCollision(tx, ty))
-            //        Perso._positionPerso.X -= walkSpeed;
+            }
+            else if (keyboardState.IsKeyDown(Keys.S))
+            {
+                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight +1);
+                animation = "walkSouth";
+                if (!IsCollision(tx, ty))
+                    Perso._positionPerso.Y += walkSpeed;
+                else
+                    Perso._positionPerso.Y -= 1;
+            }
+            else if (keyboardState.IsKeyDown(Keys.D))
+            {
+                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight);
+                animation = "walkEast";
+                if (!IsCollision(tx, ty))
+                    Perso._positionPerso.X += walkSpeed;
+                else
+                    Perso._positionPerso.X -= 1;
 
-            //}
+
+            }
+            else if (keyboardState.IsKeyDown(Keys.Q))
+            {
+                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight +1);
+                animation = "walkWest";
+                if (!IsCollision(tx, ty))
+                    Perso._positionPerso.X -= walkSpeed;
+                else
+                    Perso._positionPerso.X += 1;
+
+            }
 
             base.Update(gameTime);
         }
@@ -147,23 +159,20 @@ namespace SAE
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             World.Draw(transformMatrix);
             Perso.Draw(_spriteBatch);
-            Monstres.Draw(_spriteBatch);
+            //Monstres.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        //private bool IsCollision(ushort x, ushort y)
-        //{
-        //    // définition de tile qui peut être null (?)
-        //    TiledMapTile? tile;
-        //    if (mapLayer.TryGetTile(x, y, out tile) == false)
-        //    {
-        //        return false;
-        //    }
-
-        //    if (!tile.Value.IsBlank)
-        //        return true;
-        //    return false;
-        //}
+        private bool IsCollision(ushort x, ushort y)
+        {
+            // définition de tile qui peut être null (?)
+            TiledMapTile? tile;
+            if (mapLayer.TryGetTile(x, y, out tile) == false)
+                return false;
+            if (!tile.Value.IsBlank)
+                return true;
+            return false;
+        }
 
 
     }
