@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
+using System.Linq;
 
 namespace SAE
 {
@@ -20,10 +21,10 @@ namespace SAE
         
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
-        //public Monstres monstres = new Monstres();
+        float spawn = 0;
         public TiledMapTileLayer mapLayer;
-
-       
+        List<Enemies> enemies = new List<Enemies>();
+        Random random = new Random();
 
 
 
@@ -56,8 +57,6 @@ namespace SAE
 
             //création de la map
             World.Initialize();
-            
-            //création de liste des sprite
             
 
             //création de la caméra
@@ -145,6 +144,12 @@ namespace SAE
 
             }
 
+            spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (Enemies enemy in enemies)
+                enemy.Update(_graphics.GraphicsDevice);
+            LoadEnemies();
+
+
             base.Update(gameTime);
         }
 
@@ -159,7 +164,9 @@ namespace SAE
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             World.Draw(transformMatrix);
             Perso.Draw(_spriteBatch);
-            //Monstres.Draw(_spriteBatch);
+
+            foreach (Enemies enemy in enemies)
+                enemy.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -172,8 +179,30 @@ namespace SAE
             if (!tile.Value.IsBlank)
                 return true;
             return false;
-        }
 
+        }
+        public void LoadEnemies()
+        {
+            int randY = random.Next(1, 10);
+            
+            if(spawn >= 1)
+            {
+                spawn = 0;
+                if (enemies.Count() < 4)
+                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/perso_violet/perso_violet3"), new Vector2(1,randY)));
+            }
+            for(int i =0; i < enemies.Count(); i++)
+            {
+                if(!enemies[i].isVisible)
+                {
+                    enemies.RemoveAt(i);
+                    i--;
+                }
+            }
+
+
+        }
+        
 
     }
 }

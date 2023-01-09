@@ -13,17 +13,18 @@
 
 //namespace SAE
 //{
-//    internal class Monstres : Game1
+//    internal class Monstre : Game1
 //    {
-//        private  Vector2 _positionMonstre;
+//        private Vector2 _positionMonstre;
 //        private static AnimatedSprite _Monstre;
         
-//        private  int _sensMonstreX;
-//        private  int _sensMonstreY;
-//        private static int _vitesseMonstre;
-//        private  string _sensMonstre;
 
-//        public Monstres()
+//        private int _sensMonstreX;
+//        private int _sensMonstreY;
+//        private static int _vitesseMonstre;
+//        private string _sensMonstre;
+
+//        public Monstre()
 //        {
 //            this.Initialize();
 //        }
@@ -37,7 +38,7 @@
 //        public void Initialize()
 //        {
 //            //Random rand = new Random();
-            
+
 //            //if (rand.Next(1,2) == 1)
 //            //    _Monstre = _texture1;
 //            //else
@@ -126,12 +127,12 @@
 //            }
 
 //        }
-//        public  void Draw(SpriteBatch _spriteBatch)
+//        public void Draw(SpriteBatch _spriteBatch)
 //        {
 
 //            _spriteBatch.Draw(_Monstre, this._positionMonstre);
 
 //        }
 
-////    }
-////}
+//    }
+//}
