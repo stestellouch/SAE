@@ -22,9 +22,12 @@ namespace SAE
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
         //public Monstres monstres = new Monstres();
-        
+        List<Enemies> enemies = new List<Enemies>();
+        Random random = new Random();
+        float spawn = 0;
 
-       
+
+
 
 
 
@@ -52,7 +55,7 @@ namespace SAE
             _graphics.PreferredBackBufferHeight = 900;
             ScreenHeight= _graphics.PreferredBackBufferHeight;
             _graphics.PreferredBackBufferWidth = 1480;
-            ScreenWidth = _graphics.PreferredBackBufferHeight;
+            ScreenWidth = _graphics.PreferredBackBufferWidth;
             _graphics.ApplyChanges();
 
             //création de la map
@@ -97,8 +100,14 @@ namespace SAE
             
            
             String animation = "idle";
-        
-            
+
+
+            //Appelle a la private pour créer les enemies
+            spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (Enemies enemy in enemies)
+                enemy.Update(_graphics.GraphicsDevice);
+            LoadEnemies();
+
 
             base.Update(gameTime);
         }
@@ -120,7 +129,27 @@ namespace SAE
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        
+        public void LoadEnemies()
+        {
+            int randY = random.Next(0, ScreenHeight);
+            int randX = random.Next(0, ScreenWidth);
+            if (spawn >= 1)
+            {
+                spawn = 0;
+                if (enemies.Count() < 4)
+                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/perso_violet/perso_violet3"), new Vector2(randX, randY)));
+            }
+            for (int i = 0; i < enemies.Count(); i++)
+            {
+                if (!enemies[i].isVisible)
+                {
+                    enemies.RemoveAt(i);
+                    i--;
+                }
+            }
+
+
+        }
 
 
     }
