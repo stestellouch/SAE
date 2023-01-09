@@ -25,6 +25,8 @@ namespace SAE
         public static int _vitessePerso;
         public static string _sens;
         public static KeyboardState _keyboardState;
+        public static Vector2 _resetPosition;
+        
 
         public static void Initialize()
         {
@@ -34,6 +36,7 @@ namespace SAE
             _sensPersoX = 0;
             _vitessePerso = 100;
             _sens = "nothing";
+            _resetPosition = new Vector2(50, 50);
         }
         public static void LoadContent(Game game)
         {
@@ -41,79 +44,98 @@ namespace SAE
             
                 SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
                 _Perso = new AnimatedSprite(SpriteMC);
-            
-            
+                
+
+
         }
         public static void Update(GameTime gameTime)
         {
             _sensPersoX = 0;
             _sensPersoY = 0;
-
+            
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _Perso.Update(deltaTime);
             _keyboardState = Keyboard.GetState();
+            float walkSpeed = deltaTime * Perso._vitessePerso; // Vitesse de déplacement du sprite
+            KeyboardState keyboardState = Keyboard.GetState();
 
-            
-            
-                //Si la touche droite est pressé
-                if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)))
-                { 
-                    _sensPersoX = 1;
-                    _sensPersoY = 0;
-                    _sens = "droite";
-                    _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
+            String animation = "idle";
 
-                }
-                //Si la touche gauche est pressé
-                if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)))
+            if (keyboardState.IsKeyDown(Keys.Z))
+            {
+                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight);
+                animation = "haut";
+                if (!IsCollision(tx, ty))
                 {
-                    _sensPersoX = -1;
-                    _sensPersoY = 0;
-                    _sens = "gauche";
-                    _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
-
+                    _positionPerso.Y -= walkSpeed;
                 }
-                //Si la touche haut est pressé
-                if (_keyboardState.IsKeyDown(Keys.Z) && !(_keyboardState.IsKeyDown(Keys.S)))
+                
+
+
+            }
+            else if (keyboardState.IsKeyDown(Keys.S))
+            {
+                ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight + 1);
+                animation = "bas";
+                if (!IsCollision(tx, ty))
                 {
-                    _sensPersoY = -1;
-                    _sensPersoX = 0;
-                    _sens = "haut";
-                    _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
-
+                    _positionPerso.Y += walkSpeed;
                 }
-                //Si la touche bas est pressé
-                if (_keyboardState.IsKeyDown(Keys.S) && !(_keyboardState.IsKeyDown(Keys.Z)))
+                
+            }
+            else if (keyboardState.IsKeyDown(Keys.D))
+            {
+                ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight);
+                animation = "droite";
+                if (!IsCollision(tx, ty))
                 {
-                    _sensPersoY = 1;
-                    _sensPersoX = 0;
-                    _sens = "bas";
-                    _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
-
+                    _positionPerso.X += walkSpeed;
                 }
-                //######################################################
-                //                      ANIMATION
-                //######################################################
 
-                if (_sensPersoX == 1 && _sensPersoY == 0)
+               
+
+
+            }
+            else if (keyboardState.IsKeyDown(Keys.Q))
+            {
+                ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth);
+                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight + 1);
+                animation = "gauche";
+                if (!IsCollision(tx, ty))
+                {
+                    _positionPerso.X -= walkSpeed;
+                }
+                
+
+            }
+            if (keyboardState.IsKeyDown(Keys.Tab))
+                _positionPerso = _resetPosition;
+            //######################################################
+            //                      ANIMATION
+            //######################################################
+
+            if (animation == "droite")
                 {
                     _Perso.Play("right_Walk");
 
                 }
-                else if (_sensPersoX == -1 && _sensPersoY == 0)
+                else if (animation == "gauche")
                 {
                     _Perso.Play("left_Walk");
                 }
-                else if (_sensPersoY == -1 && _sensPersoX == 0)
+                else if (animation == "haut")
                 {
                     _Perso.Play("up_Walk");
                 }
-                else if (_sensPersoY == 1 && _sensPersoX == 0)
+                else if (animation == "bas")
                 {
                     _Perso.Play("down_Walk");
                 }
-                else if (_sensPersoY == 0 && _sensPersoX == 0)
+                else if (animation =="idle")
                 {
                     if (_sens == "bas") _Perso.Play("idle_down");
                     else if (_sens == "haut") _Perso.Play("idle_up");
@@ -126,14 +148,7 @@ namespace SAE
                 //                      ATTAQUE
                 //######################################################
 
-                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == 1 && _sensPersoY == 0))
-                    _Perso.Play("right_swing");
-                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoX == -1 && _sensPersoY == 0))
-                    _Perso.Play("left_swing");
-                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == 1 && _sensPersoX == 0))
-                    _Perso.Play("down_swing");
-                if (_keyboardState.IsKeyDown(Keys.Space) && (_sensPersoY == -1 && _sensPersoX == 0))
-                    _Perso.Play("up_swing");
+                
             
             
             
@@ -143,6 +158,16 @@ namespace SAE
             
             _spriteBatch.Draw(_Perso, _positionPerso);
         
+        }
+        public static bool IsCollision(ushort x, ushort y)
+        {
+            // définition de tile qui peut être null (?)
+            TiledMapTile? tile;
+            if (World.mapLayer.TryGetTile(x, y, out tile) == false)
+                return false;
+            if (!tile.Value.IsBlank)
+                return true;
+            return false;
         }
     }
 }

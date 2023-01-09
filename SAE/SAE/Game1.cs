@@ -21,7 +21,7 @@ namespace SAE
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
         //public Monstres monstres = new Monstres();
-        public TiledMapTileLayer mapLayer;
+        
 
        
 
@@ -72,7 +72,7 @@ namespace SAE
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             World.LoadContent(this);
             Perso.LoadContent(this);
-            mapLayer = World._tiledMap.GetLayer<TiledMapTileLayer>("obstacles");
+            
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -99,51 +99,7 @@ namespace SAE
            
             String animation = "idle";
         
-            if (keyboardState.IsKeyDown(Keys.Z))
-            {
-                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight);
-                animation = "walkNorth";
-                if (!IsCollision(tx, ty))
-                    Perso._positionPerso.Y -= walkSpeed;
-                else
-                    Perso._positionPerso.Y += 1;
-
-
-            }
-            else if (keyboardState.IsKeyDown(Keys.S))
-            {
-                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight +1);
-                animation = "walkSouth";
-                if (!IsCollision(tx, ty))
-                    Perso._positionPerso.Y += walkSpeed;
-                else
-                    Perso._positionPerso.Y -= 1;
-            }
-            else if (keyboardState.IsKeyDown(Keys.D))
-            {
-                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight);
-                animation = "walkEast";
-                if (!IsCollision(tx, ty))
-                    Perso._positionPerso.X += walkSpeed;
-                else
-                    Perso._positionPerso.X -= 1;
-
-
-            }
-            else if (keyboardState.IsKeyDown(Keys.Q))
-            {
-                ushort tx = (ushort)(Perso._positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(Perso._positionPerso.Y / World._tiledMap.TileHeight +1);
-                animation = "walkWest";
-                if (!IsCollision(tx, ty))
-                    Perso._positionPerso.X -= walkSpeed;
-                else
-                    Perso._positionPerso.X += 1;
-
-            }
+            
 
             base.Update(gameTime);
         }
@@ -163,16 +119,7 @@ namespace SAE
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
-        }
+        
 
 
     }
