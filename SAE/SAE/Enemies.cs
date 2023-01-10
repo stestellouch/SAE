@@ -24,14 +24,14 @@ namespace SAE
         {
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float walkSpeed = deltaTime * Perso._vitessePerso;
+            float walkSpeed = (float)(deltaTime * (Perso._vitessePerso -30));
             //Si le monstre est à droite du personnage
             if (this.position.X > Perso._positionPerso.X)
             {
                 position.X -= walkSpeed;
             }
             //Si le monstre est à gauche du personnage
-            else if (this.position.X < Perso._positionPerso.X)
+            if (this.position.X < Perso._positionPerso.X)
             {
                 position.X += walkSpeed;
             }
@@ -41,7 +41,7 @@ namespace SAE
                 position.Y -= walkSpeed;
             }
             //Si le monstre est au dessus du personnage
-            else if (this.position.Y < Perso._positionPerso.Y)
+            if (this.position.Y < Perso._positionPerso.Y)
             {
                 position.Y += walkSpeed;
             }
