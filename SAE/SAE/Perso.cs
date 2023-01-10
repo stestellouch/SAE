@@ -66,8 +66,9 @@ namespace SAE
             _keyboardState = Keyboard.GetState();
             float walkSpeed = deltaTime * Perso._vitessePerso; // Vitesse de déplacement du sprite
             KeyboardState keyboardState = Keyboard.GetState();
-
-            String animation = "idle";
+            String animation = "none";
+            
+            animation = "idle";
 
             if (!(keyboardState.IsKeyDown(Keys.Space)))
             {
@@ -122,8 +123,6 @@ namespace SAE
                         _positionPerso.X -= walkSpeed;
                         _sens = "gauche";
                     }
-
-
                 }
             }
             if (keyboardState.IsKeyDown(Keys.Tab))
@@ -149,24 +148,23 @@ namespace SAE
             {
                 _Perso.Play("down_Walk");
             }
-            else if (animation =="idle")
+            
+            
+            
+            
+            if (animation =="idle")
             {
                 if (_sens == "bas") _Perso.Play("idle_down");
                 else if (_sens == "haut") _Perso.Play("idle_up");
                 else if (_sens == "droite") _Perso.Play("idle_right");
                 else if (_sens == "gauche") _Perso.Play("idle_left");
             }
-
-
-            //######################################################
-            //                      ATTAQUE
-            //######################################################
-            if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
+            else if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
             {
                 if (_sens == "haut") _Perso.Play("up_swing");
                 else if (_sens == "bas") _Perso.Play("down_swing");
                 else if (_sens == "droite") _Perso.Play("right_swing");
-                else if (_sens == "left") _Perso.Play("left_swing");
+                else if (_sens == "gauche") _Perso.Play("left_swing");
             }
                 
             
