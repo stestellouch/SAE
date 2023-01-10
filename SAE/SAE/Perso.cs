@@ -22,7 +22,7 @@ namespace SAE
         public static AnimatedSprite _Perso;
         public static int _sensPersoX;
         public static int _sensPersoY;
-        public static int _vitessePerso;
+        public static float _vitessePerso;
         public static string _sens;
         public static KeyboardState _keyboardState;
         public static Vector2 _resetPosition;

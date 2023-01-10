@@ -136,10 +136,10 @@ namespace SAE
             if (spawn >= tempsCreationEnemie)
             {
                 spawn = 0;
-                if (enemies.Count() < 4)
-                {
+                //if (enemies.Count() < 4)
+                //{
                     enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/fantome"), new Vector2(randX, randY)));
-                }
+                //}
             }
             for (int i = 0; i < enemies.Count(); i++)
             {
