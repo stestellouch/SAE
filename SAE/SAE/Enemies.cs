@@ -8,16 +8,21 @@ namespace SAE
     {
         public Texture2D texture;
         public Vector2 position;
-        Rectangle fantome;
+        //Rectangle fantome;
+        public double originWidth;
+        public double originHeight;
 
         public bool isVisible = true;
-
+         
 
         public Enemies(Texture2D newTexture, Vector2 newPosition)
         {
             texture = newTexture;
             position = newPosition;
-            fantome = new Rectangle();
+            
+            originWidth = (texture.Width / 2);
+            originHeight = (texture.Height / 2);
+
 
         }
         public void Update(GraphicsDevice graphics, GameTime gameTime)
@@ -26,29 +31,25 @@ namespace SAE
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = (float)(deltaTime * (Perso._vitessePerso -30));
             //Si le monstre est à droite du personnage
-            if (this.position.X > Perso._positionPerso.X)
+            if (this.position.X > Perso._positionPerso.X-originWidth)
             {
                 position.X -= walkSpeed;
             }
-            //Si le monstre est à gauche du personnage
+            
             if (this.position.X < Perso._positionPerso.X)
             {
                 position.X += walkSpeed;
             }
             //Si le monstre est au dessous du personnage
-            if (this.position.Y > Perso._positionPerso.Y)
+            if (this.position.Y > Perso._positionPerso.Y- originHeight)
             {
                 position.Y -= walkSpeed;
             }
-            //Si le monstre est au dessus du personnage
+                        
             if (this.position.Y < Perso._positionPerso.Y)
             {
                 position.Y += walkSpeed;
             }
-            //else if (this.position.Y == Perso._positionPerso.Y && this.position.X == Perso._positionPerso.X)
-            //{
-
-            //}
         }
         public void Draw(SpriteBatch spriteBatch)
         {

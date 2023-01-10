@@ -31,6 +31,7 @@ namespace SAE
         public Perso()
         {
 
+
         }
 
         public static void Initialize()
@@ -130,31 +131,6 @@ namespace SAE
             //                      ANIMATION
             //######################################################
 
-            //if (animation == "droite")
-            //{
-            //    _Perso.Play("right_Walk");
-
-            //}
-            //else if (animation == "gauche")
-            //{
-            //    _Perso.Play("left_Walk");
-            //}
-            //else if (animation == "haut")
-            //{
-            //    _Perso.Play("up_Walk");
-            //}
-            //else if (animation == "bas")
-            //{
-            //    _Perso.Play("down_Walk");
-            //}
-            
-            //if (animation =="idle")
-            //{
-            //    if (_sens == "down") _Perso.Play("idle_down");
-            //    else if (_sens == "up") _Perso.Play("idle_up");
-            //    else if (_sens == "right") _Perso.Play("idle_right");
-            //    else if (_sens == "left") _Perso.Play("idle_left");
-            //}
             if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
             {
                 if (_sens == "haut") _Perso.Play("up_swing");
