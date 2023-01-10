@@ -6,22 +6,22 @@
   },
   "cycles": {
     "right_Walk": {
-      "frames": [24,25,26],
+      "frames": [24,25,26,25],
       "isLooping": false,
       "frameDuration": 0.2
     },
     "left_Walk": {
-      "frames": [12,13,14],
+      "frames": [12,13,14,13],
       "isLooping": false,
       "frameDuration": 0.2
     },
     "up_Walk": {
-      "frames": [37,38,39],
+      "frames": [36,37,38,37],
       "isLooping": false,
       "frameDuration": 0.2
     },
     "down_Walk": {
-      "frames": [0,1,2],
+      "frames": [0,1,2,1],
       "isLooping": false,
       "frameDuration": 0.2
     },

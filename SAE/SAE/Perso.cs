@@ -62,9 +62,10 @@ namespace SAE
             KeyboardState keyboardState = Keyboard.GetState();
             String animation = "none";
             
-            animation = "idle";
+            if (!(keyboardState.IsKeyDown(Keys.Z) || keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Q)))
+                animation = "idle";
 
-            if (!(keyboardState.IsKeyDown(Keys.Space)))
+            if (!(keyboardState.IsKeyDown(Keys.Space)) && animation != "idle")
             {
                 if (keyboardState.IsKeyDown(Keys.Z))
                 {
@@ -75,6 +76,7 @@ namespace SAE
                     {
                         _positionPerso.Y -= walkSpeed;
                         _sens = "haut";
+                        _Perso.Play("up_Walk");
                     }
 
 
@@ -89,6 +91,7 @@ namespace SAE
                     {
                         _positionPerso.Y += walkSpeed;
                         _sens = "bas";
+                        _Perso.Play("down_Walk");
                     }
 
                 }
@@ -101,6 +104,7 @@ namespace SAE
                     {
                         _positionPerso.X += walkSpeed;
                         _sens = "droite";
+                        _Perso.Play("right_Walk");
                     }
 
 
@@ -116,6 +120,7 @@ namespace SAE
                     {
                         _positionPerso.X -= walkSpeed;
                         _sens = "gauche";
+                        _Perso.Play("left_Walk");
                     }
                 }
             }
@@ -125,31 +130,31 @@ namespace SAE
             //                      ANIMATION
             //######################################################
 
-            if (animation == "droite")
-            {
-                _Perso.Play("right_Walk");
+            //if (animation == "droite")
+            //{
+            //    _Perso.Play("right_Walk");
 
-            }
-            else if (animation == "gauche")
-            {
-                _Perso.Play("left_Walk");
-            }
-            else if (animation == "haut")
-            {
-                _Perso.Play("up_Walk");
-            }
-            else if (animation == "bas")
-            {
-                _Perso.Play("down_Walk");
-            }
+            //}
+            //else if (animation == "gauche")
+            //{
+            //    _Perso.Play("left_Walk");
+            //}
+            //else if (animation == "haut")
+            //{
+            //    _Perso.Play("up_Walk");
+            //}
+            //else if (animation == "bas")
+            //{
+            //    _Perso.Play("down_Walk");
+            //}
             
-            if (animation =="idle")
-            {
-                if (_sens == "down") _Perso.Play("idle_down");
-                else if (_sens == "up") _Perso.Play("idle_up");
-                else if (_sens == "right") _Perso.Play("idle_right");
-                else if (_sens == "left") _Perso.Play("idle_left");
-            }
+            //if (animation =="idle")
+            //{
+            //    if (_sens == "down") _Perso.Play("idle_down");
+            //    else if (_sens == "up") _Perso.Play("idle_up");
+            //    else if (_sens == "right") _Perso.Play("idle_right");
+            //    else if (_sens == "left") _Perso.Play("idle_left");
+            //}
             if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
             {
                 if (_sens == "haut") _Perso.Play("up_swing");
