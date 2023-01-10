@@ -154,7 +154,7 @@ namespace SAE
                 if (_sens == "bas") _Perso.Play("idle_down");
                 else if (_sens == "haut") _Perso.Play("idle_up");
                 else if (_sens == "droite") _Perso.Play("idle_right");
-                else if (_sens == "left") _Perso.Play("idle_left");
+                else if (_sens == "gauche") _Perso.Play("idle_left");
             }
 
 

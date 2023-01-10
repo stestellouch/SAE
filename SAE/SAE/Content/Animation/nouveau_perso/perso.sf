@@ -1,6 +1,6 @@
 {
   "textureAtlas": {
-    "texture": "..\\Downloads\\free_character_0(2).png",
+    "texture": "free_character_0(2).png",
     "regionWidth": 64,
     "regionHeight": 64
   },
@@ -16,7 +16,7 @@
       "frameDuration": 0.2
     },
     "up_Walk": {
-      "frames": [36,37,38],
+      "frames": [37,38,39],
       "isLooping": false,
       "frameDuration": 0.2
     },
@@ -42,6 +42,26 @@
     },
     "idle_up": {
       "frames": [37],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "down_swing": {
+      "frames": [3,4,5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "left_swing": {
+      "frames": [15,16,17],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "right_swing": {
+      "frames": [27,28,29],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "up_swing": {
+      "frames": [39,40,41],
       "isLooping": false,
       "frameDuration": 0.2
     }
