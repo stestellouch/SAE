@@ -11,6 +11,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Linq;
+using Microsoft.Xna.Framework.Media;
 
 namespace SAE
 {
@@ -29,6 +30,8 @@ namespace SAE
         float tempsJeux = 0;
         public int tempsCreationEnemie = 10;
 
+        //son
+        public static Song _musique;
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -64,6 +67,10 @@ namespace SAE
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
             Camera.Initialize(viewportadapter);
 
+
+            //son
+            MediaPlayer.IsRepeating = true;
+
             base.Initialize();
         }
 
@@ -74,6 +81,9 @@ namespace SAE
             Perso.LoadContent(this);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _musique = Content.Load<Song>("Caketown 1");
+            MediaPlayer.Play(_musique);
         }
 
         protected override void Update(GameTime gameTime)
@@ -136,10 +146,10 @@ namespace SAE
             if (spawn >= tempsCreationEnemie)
             {
                 spawn = 0;
-                //if (enemies.Count() < 4)
-                //{
-                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/fantome"), new Vector2(randX, randY)));
-                //}
+                
+                
+                enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));
+                
             }
             for (int i = 0; i < enemies.Count(); i++)
             {

@@ -19,7 +19,7 @@ namespace SAE
         {
             texture = newTexture;
             position = newPosition;
-            //fantome = new Rectangle();
+            
             originWidth = (texture.Width / 2);
             originHeight = (texture.Height / 2);
 
@@ -35,12 +35,8 @@ namespace SAE
             {
                 position.X -= walkSpeed;
             }
-            //Si le monstre est à gauche du personnage
-<<<<<<< HEAD
-            else if (this.position.X < Perso._positionPerso.X- originWidth)
-=======
+            
             if (this.position.X < Perso._positionPerso.X)
->>>>>>> 9fed47d97699cb0668bf382d176e9612636386d5
             {
                 position.X += walkSpeed;
             }
@@ -49,19 +45,11 @@ namespace SAE
             {
                 position.Y -= walkSpeed;
             }
-            //Si le monstre est au dessus du personnage
-<<<<<<< HEAD
-            else if (this.position.Y < Perso._positionPerso.Y- originHeight)
-=======
+                        
             if (this.position.Y < Perso._positionPerso.Y)
->>>>>>> 9fed47d97699cb0668bf382d176e9612636386d5
             {
                 position.Y += walkSpeed;
             }
-            //else if (this.position.Y == Perso._positionPerso.Y && this.position.X == Perso._positionPerso.X)
-            //{
-
-            //}
         }
         public void Draw(SpriteBatch spriteBatch)
         {
