@@ -18,6 +18,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Animation/nouveau_perso/free_character_0(2).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/nouveau_perso/free_character_0(2).png
+
 #begin Animation/perso_bleu/_srw_free_character_1-3.6.png
 /importer:TextureImporter
 /processor:TextureProcessor

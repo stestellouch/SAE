@@ -1,8 +1,8 @@
 {
   "textureAtlas": {
-    "texture": "..\\..\\..\\..\\..\\..\\..\\Downloads\\free_character_0(1).png",
-    "regionWidth": 96,
-    "regionHeight": 96
+    "texture": "..\\Downloads\\free_character_0(2).png",
+    "regionWidth": 64,
+    "regionHeight": 64
   },
   "cycles": {
     "right_Walk": {
