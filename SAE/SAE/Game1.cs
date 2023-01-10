@@ -20,16 +20,14 @@ namespace SAE
         public static SpriteBatch _spriteBatch;
         
         public  KeyboardState _keyboardState;
-        public static float deltaSeconds;
-        //public Monstres monstres = new Monstres();
+        //public static float deltaSeconds;
+        //Création enemies
         List<Enemies> enemies = new List<Enemies>();
         Random random = new Random();
+        //Créations des différents compteurs
         float spawn = 0;
-
-
-
-
-
+        float tempsJeux = 0;
+        public int tempsCreationEnemie = 10;
 
 
         //taille écran pour caméra
@@ -74,15 +72,24 @@ namespace SAE
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             World.LoadContent(this);
             Perso.LoadContent(this);
-            
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
         }
 
         protected override void Update(GameTime gameTime)
         {
+
+            //compteur temps jeux 
+            tempsJeux += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if(tempsJeux %30 == 0)
+            {
+                if(tempsCreationEnemie >= 3)
+                {
+                    tempsCreationEnemie -= 1;
+
+                }
+            }
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             World.Update(gameTime);           
@@ -102,7 +109,8 @@ namespace SAE
             
 
 
-            //Appelle a la private pour créer les enemies
+            //Appelle a LoadEnemies pour créer les enemies
+            
             spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
             foreach (Enemies enemy in enemies)
                 enemy.Update(_graphics.GraphicsDevice);
@@ -133,24 +141,22 @@ namespace SAE
         {
             int randY = random.Next(0, ScreenHeight);
             int randX = random.Next(0, ScreenWidth);
-            if (spawn >= 1)
+            if (spawn >= tempsCreationEnemie)
             {
                 spawn = 0;
                 if (enemies.Count() < 4)
-                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/perso_violet/perso_violet3"), new Vector2(randX, randY)));
-            }
-            for (int i = 0; i < enemies.Count(); i++)
-            {
-                if (!enemies[i].isVisible)
                 {
-                    enemies.RemoveAt(i);
-                    i--;
+                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/perso_violet/perso_violet3"), new Vector2(randX, randY)));
                 }
             }
-
-
+            //for (int i = 0; i < enemies.Count(); i++)
+            //{
+            //    if (!enemies[i].isVisible)
+            //    {
+            //        enemies.RemoveAt(i);
+            //        i--;
+            //    }
+            //}
         }
-
-
     }
 }
