@@ -13,7 +13,7 @@ namespace SAE
         public double originHeight;
 
         public bool isVisible = true;
-
+         
 
         public Enemies(Texture2D newTexture, Vector2 newPosition)
         {
