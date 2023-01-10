@@ -21,17 +21,13 @@ namespace SAE
         
         public  KeyboardState _keyboardState;
         public static float deltaSeconds;
-        //public Monstres monstres = new Monstres();
+        //Création enemies
         List<Enemies> enemies = new List<Enemies>();
         Random random = new Random();
+        //Créations des différents compteurs
         float spawn = 0;
         float tempsJeux = 0;
         public int tempsCreationEnemie = 10;
-
-
-
-
-
 
 
         //taille écran pour caméra
@@ -164,10 +160,6 @@ namespace SAE
             //        i--;
             //    }
             //}
-
-
         }
-
-
     }
 }
