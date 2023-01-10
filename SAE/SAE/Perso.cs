@@ -78,7 +78,7 @@ namespace SAE
             else if (keyboardState.IsKeyDown(Keys.S))
             {
                 ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight + 1);
+                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight +1);
                 animation = "bas";
                 if (!IsCollision(tx, ty))
                 {
@@ -88,7 +88,7 @@ namespace SAE
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             {
-                ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth);
+                ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth +1);
                 ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight);
                 animation = "droite";
                 if (!IsCollision(tx, ty))
@@ -103,7 +103,7 @@ namespace SAE
             else if (keyboardState.IsKeyDown(Keys.Q))
             {
                 ushort tx = (ushort)(_positionPerso.X / World._tiledMap.TileWidth);
-                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight + 1);
+                ushort ty = (ushort)(_positionPerso.Y / World._tiledMap.TileHeight);
                 animation = "gauche";
                 if (!IsCollision(tx, ty))
                 {

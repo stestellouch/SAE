@@ -99,7 +99,7 @@ namespace SAE
             KeyboardState keyboardState = Keyboard.GetState();
             
            
-            String animation = "idle";
+            
 
 
             //Appelle a la private pour créer les enemies
