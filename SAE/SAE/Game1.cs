@@ -98,7 +98,6 @@ namespace SAE
             _keyboardState = Keyboard.GetState();
 
             Perso.Update(gameTime);
-            
             Camera.Update(gameTime);
 
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds; // DeltaTime
@@ -113,7 +112,7 @@ namespace SAE
             
             spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
             foreach (Enemies enemy in enemies)
-                enemy.Update(_graphics.GraphicsDevice);
+                enemy.Update(_graphics.GraphicsDevice, gameTime);
             LoadEnemies();
 
 

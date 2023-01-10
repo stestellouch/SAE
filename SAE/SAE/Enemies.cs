@@ -8,6 +8,7 @@ namespace SAE
     {
         public Texture2D texture;
         public Vector2 position;
+        public int _vitesseMonstre;
         //public Vector2 velocity;
 
         public bool isVisible = true;
@@ -26,17 +27,35 @@ namespace SAE
             //velocity = new Vector2(randX, randY);
 
         }
-        public void Update(GraphicsDevice graphics)
+        public void Update(GraphicsDevice graphics, GameTime gameTime)
         {
 
-            //position += velocity;
-            //if(position.Y <= 0 || position.Y >= graphics.Viewport.Height - texture.Height)
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float walkSpeed = deltaTime * Perso._vitessePerso+1;
+            //Si le monstre est à droite du personnage
+            if (this.position.X > Perso._positionPerso.X)
+            {
+                position.X -= walkSpeed;
+            }
+            //Si le monstre est à gauche du personnage
+            else if (this.position.X < Perso._positionPerso.X)
+            {
+                position.X += walkSpeed;
+            }
+            //Si le monstre est au dessous du personnage
+            if (this.position.Y > Perso._positionPerso.Y)
+            {
+                position.Y -= walkSpeed;
+            }
+            //Si le monstre est au dessus du personnage
+            else if (this.position.Y < Perso._positionPerso.Y)
+            {
+                position.Y += walkSpeed;
+            }
+            //else if (this.position.Y == Perso._positionPerso.Y && this.position.X == Perso._positionPerso.X)
             //{
-            //    velocity.Y = -velocity.Y;
-            //}
-            //if (position.X < 0 - texture.Width)
-            //    isVisible = false;
 
+            //}
         }
         public void Draw(SpriteBatch spriteBatch)
         {
