@@ -20,14 +20,21 @@ namespace SAE
     {
         public static Vector2 _positionPerso;
         public static AnimatedSprite _Perso;
+        //public Rectangle _rectanglePerso;
         public static int _sensPersoX;
         public static int _sensPersoY;
         public static int _vitessePerso;
         public static string _sens;
         public static KeyboardState _keyboardState;
         public static Vector2 _resetPosition;
-        
-        
+
+        public Perso()
+        {
+            //_rectanglePerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 50, 100);
+
+
+        }
+
         public static void Initialize()
         {
             
@@ -42,8 +49,8 @@ namespace SAE
         {
            
             
-                SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
-                _Perso = new AnimatedSprite(SpriteMC);
+             SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
+             _Perso = new AnimatedSprite(SpriteMC);
                 
 
 
