@@ -49,7 +49,7 @@ namespace SAE
         {
            
             
-             SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/MC.sf", new JsonContentLoader());
+             SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/nouveau_perso/perso.sf", new JsonContentLoader());
              _Perso = new AnimatedSprite(SpriteMC);
                 
 
