@@ -100,14 +100,8 @@ namespace SAE
             Perso.Update(gameTime);
             Camera.Update(gameTime);
 
-            //float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds; // DeltaTime
-            //float walkSpeed = deltaSeconds * Perso._vitessePerso; // Vitesse de déplacement du sprite
             KeyboardState keyboardState = Keyboard.GetState();
             
-           
-            
-
-
             //Appelle a LoadEnemies pour créer les enemies
             
             spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -126,7 +120,6 @@ namespace SAE
             var transformMatrix = Camera._camera.GetViewMatrix();
 
             //affichage avec caméra
-            //_spriteBatch.Begin();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             World.Draw(transformMatrix);
             Perso.Draw(_spriteBatch);
@@ -145,17 +138,17 @@ namespace SAE
                 spawn = 0;
                 if (enemies.Count() < 4)
                 {
-                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/perso_violet/perso_violet3"), new Vector2(randX, randY)));
+                    enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/fantome"), new Vector2(randX, randY)));
                 }
             }
-            //for (int i = 0; i < enemies.Count(); i++)
-            //{
-            //    if (!enemies[i].isVisible)
-            //    {
-            //        enemies.RemoveAt(i);
-            //        i--;
-            //    }
-            //}
+            for (int i = 0; i < enemies.Count(); i++)
+            {
+                if (!enemies[i].isVisible)
+                {
+                    enemies.RemoveAt(i);
+                    i--;
+                }
+            }
         }
     }
 }

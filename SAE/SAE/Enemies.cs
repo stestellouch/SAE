@@ -8,30 +8,23 @@ namespace SAE
     {
         public Texture2D texture;
         public Vector2 position;
-        public int _vitesseMonstre;
-        //public Vector2 velocity;
+        Rectangle fantome;
 
         public bool isVisible = true;
 
-        Random random = new Random();
-        int randX, randY;
 
         public Enemies(Texture2D newTexture, Vector2 newPosition)
         {
             texture = newTexture;
             position = newPosition;
-
-            randY = random.Next(1, 10);
-            randX = random.Next(1, 10);
-
-            //velocity = new Vector2(randX, randY);
+            fantome = new Rectangle();
 
         }
         public void Update(GraphicsDevice graphics, GameTime gameTime)
         {
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float walkSpeed = deltaTime * Perso._vitessePerso+1;
+            float walkSpeed = deltaTime * Perso._vitessePerso;
             //Si le monstre est à droite du personnage
             if (this.position.X > Perso._positionPerso.X)
             {

@@ -20,7 +20,6 @@ namespace SAE
     {
         public static Vector2 _positionPerso;
         public static AnimatedSprite _Perso;
-        //public Rectangle _rectanglePerso;
         public static int _sensPersoX;
         public static int _sensPersoY;
         public static int _vitessePerso;
@@ -28,16 +27,14 @@ namespace SAE
         public static KeyboardState _keyboardState;
         public static Vector2 _resetPosition;
 
+
         public Perso()
         {
-            //_rectanglePerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 50, 100);
-
 
         }
 
         public static void Initialize()
         {
-            
             _positionPerso = new Vector2(50,50);
             _sensPersoY = 0;
             _sensPersoX = 0;
@@ -48,12 +45,9 @@ namespace SAE
         public static void LoadContent(Game game)
         {
            
-            
              SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/nouveau_perso/perso.sf", new JsonContentLoader());
              _Perso = new AnimatedSprite(SpriteMC);
                 
-
-
         }
         public static void Update(GameTime gameTime)
         {
@@ -149,27 +143,20 @@ namespace SAE
                 _Perso.Play("down_Walk");
             }
             
-            
-            
-            
             if (animation =="idle")
             {
-                if (_sens == "bas") _Perso.Play("idle_down");
-                else if (_sens == "haut") _Perso.Play("idle_up");
-                else if (_sens == "droite") _Perso.Play("idle_right");
-                else if (_sens == "gauche") _Perso.Play("idle_left");
+                if (_sens == "down") _Perso.Play("idle_down");
+                else if (_sens == "up") _Perso.Play("idle_up");
+                else if (_sens == "right") _Perso.Play("idle_right");
+                else if (_sens == "left") _Perso.Play("idle_left");
             }
-            else if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
+            if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
             {
                 if (_sens == "haut") _Perso.Play("up_swing");
                 else if (_sens == "bas") _Perso.Play("down_swing");
                 else if (_sens == "droite") _Perso.Play("right_swing");
                 else if (_sens == "gauche") _Perso.Play("left_swing");
             }
-                
-            
-            
-            
         }
         public static void Draw(SpriteBatch _spriteBatch)
         {
