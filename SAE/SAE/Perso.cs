@@ -27,7 +27,7 @@ namespace SAE
         public static KeyboardState _keyboardState;
         public static Vector2 _resetPosition;
         
-
+        
         public static void Initialize()
         {
             
