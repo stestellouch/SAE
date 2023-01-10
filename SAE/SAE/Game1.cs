@@ -20,7 +20,7 @@ namespace SAE
         public static SpriteBatch _spriteBatch;
         
         public  KeyboardState _keyboardState;
-        public static float deltaSeconds;
+        //public static float deltaSeconds;
         //Création enemies
         List<Enemies> enemies = new List<Enemies>();
         Random random = new Random();
@@ -72,11 +72,8 @@ namespace SAE
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             World.LoadContent(this);
             Perso.LoadContent(this);
-            
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
         }
 
         protected override void Update(GameTime gameTime)
