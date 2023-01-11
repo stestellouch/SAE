@@ -47,7 +47,7 @@ namespace SAE
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
             
-            colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y,  64,64);
+            colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
         }
         public static void LoadContent(Game game)
         {
