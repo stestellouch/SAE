@@ -29,6 +29,7 @@ namespace SAE
         public static Vector2 _resetPosition;
         public static int _viePerso;
         public static Rectangle colisionPerso;
+        public static bool estEnViePerso = true;
 
         public Perso()
         {
@@ -66,7 +67,6 @@ namespace SAE
             float walkSpeed = deltaTime * Perso._vitessePerso; // Vitesse de déplacement du sprite
             keyboardState = Keyboard.GetState();
             String animation = "none";
-            String attaque = "none";
             
             if (!(keyboardState.IsKeyDown(Keys.Z) || keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Q)))
                 animation = "idle";
@@ -143,35 +143,34 @@ namespace SAE
             //######################################################
 
 
-            
-                if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
-                {
-                    if (_sens == "haut")
-                    {
-                        _Perso.Play("up_swing");
-                        attaque = "attaque haut";
-                    }
 
-                    else if (_sens == "bas")
-                    {
-                        _Perso.Play("down_swing");
-                        attaque = "attaque bas";
-                    }
-                    else if (_sens == "droite")
-                    {
-                        _Perso.Play("right_swing");
-                        attaque = "attaque droite";
-                    }
-                    else if (_sens == "gauche")
-                    {
-                        _Perso.Play("left_swing");
-                        attaque = "attaque gauche";
-                    }
-                    
-                    
-                
+            if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
+            {
+                if (_sens == "haut")
+                {
+                    _Perso.Play("up_swing");
+                }
+
+                else if (_sens == "bas")
+                {
+                    _Perso.Play("down_swing");
+                }
+                else if (_sens == "droite")
+                {
+                    _Perso.Play("right_swing");
+                }
+                else if (_sens == "gauche")
+                {
+                    _Perso.Play("left_swing");
+                }
 
             }
+
+            if (_viePerso <= 0)
+                estEnViePerso = false;
+                
+
+            
             
 
         }
