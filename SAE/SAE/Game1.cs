@@ -159,6 +159,11 @@ namespace SAE
             foreach (Enemies enemy in _enemies)
                 enemy.Draw(_spriteBatch);
 
+
+            //foreach (Enemies enemy in _enemies)
+            //    if (enemy._estEnVie == true)
+            //        enemy.Draw(_spriteBatch);
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -174,8 +179,7 @@ namespace SAE
             {
                 _spawn = 0; //On remet spawn à 0 pour remonter jusque 10 etc.
                 
-                MediaPlayer.Pause();
-                _enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));//Ajout d'un monstre
+                _enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY), 100, true));//Ajout d'un monstre
                 
             }
             
