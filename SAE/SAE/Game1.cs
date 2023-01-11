@@ -158,8 +158,13 @@ namespace SAE
 
             //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
             foreach (Enemies enemy in enemies)
+            {
                 if (enemy._estEnVie == true)
+                {
                     enemy.Draw(_spriteBatch);
+                }
+                
+            }
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -167,8 +172,8 @@ namespace SAE
         {
 
             //Création des positions random des monstres
-            int randY = random.Next(0, ScreenHeight);
-            int randX = random.Next(0, ScreenWidth);
+            int randY = random.Next(0, 100);
+            int randX = random.Next(0, 100);
             int vie = 50;
             bool enVie = true;
             if (spawn >= tempsCreationEnemie)
