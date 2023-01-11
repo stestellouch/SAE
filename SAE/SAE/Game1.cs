@@ -177,7 +177,6 @@ namespace SAE
                 MediaPlayer.Pause();
                 _enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));//Ajout d'un monstre
                 
-                MediaPlayer.Resume();
             }
             
         }
