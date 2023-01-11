@@ -30,6 +30,7 @@ namespace SAE
         public static int _viePerso;
         public static Rectangle colisionPerso;
         public static bool _attaque;
+        public static float _compteurAttaque ;
 
 
         public Perso()
@@ -46,7 +47,8 @@ namespace SAE
             _viePerso = 100;
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
-            
+            _attaque = true;
+            _compteurAttaque = 0;
             colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
         }
         public static void LoadContent(Game game)
@@ -63,6 +65,9 @@ namespace SAE
             
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _compteurAttaque += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+
             _Perso.Update(deltaTime);
             float walkSpeed = deltaTime * Perso._vitessePerso; // Vitesse de déplacement du sprite
             keyboardState = Keyboard.GetState();
@@ -146,32 +151,40 @@ namespace SAE
 
             if(_attaque == true)
             {
+                if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
+                {
+                    if (_sens == "haut")
+                    {
+                        _Perso.Play("up_swing");
+                        attaque = "attaque haut";
+                    }
+
+                    else if (_sens == "bas")
+                    {
+                        _Perso.Play("down_swing");
+                        attaque = "attaque bas";
+                    }
+                    else if (_sens == "droite")
+                    {
+                        _Perso.Play("right_swing");
+                        attaque = "attaque droite";
+                    }
+                    else if (_sens == "gauche")
+                    {
+                        _Perso.Play("left_swing");
+                        attaque = "attaque gauche";
+                    }
+                    _attaque = false;
+                    _compteurAttaque = 0;
+                }
 
             }
-            if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
+            if(_compteurAttaque >2)
             {
-                if (_sens == "haut")
-                {
-                    _Perso.Play("up_swing");
-                    attaque = "attaque haut";
-                }
-
-                else if (_sens == "bas")
-                {
-                    _Perso.Play("down_swing");
-                    attaque = "attaque bas";
-                }
-                else if (_sens == "droite")
-                {
-                    _Perso.Play("right_swing");
-                    attaque = "attaque droite";
-                }
-                else if (_sens == "gauche")
-                {
-                    _Perso.Play("left_swing");
-                    attaque = "attaque gauche";
-                }
+                _attaque = true;
             }
+            
+
         }
         public static void Draw(SpriteBatch _spriteBatch)
         {
