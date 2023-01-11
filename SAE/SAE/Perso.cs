@@ -37,7 +37,6 @@ namespace SAE
 
 
         }
-
         public static void Initialize()
         {
             _positionPerso = new Vector2(50,50);

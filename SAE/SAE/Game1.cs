@@ -156,7 +156,9 @@ namespace SAE
             Perso.Draw(_spriteBatch);
 
             //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
+            
             foreach (Enemies enemy in _enemies)
+<<<<<<< HEAD
             {
                 if (enemy._estEnVie == true)
                 {
@@ -164,6 +166,11 @@ namespace SAE
                 }
                 
             }
+=======
+                if (enemy._estEnVie == true)
+                    enemy.Draw(_spriteBatch);
+
+>>>>>>> f99bcba611ea1cd4e3282c371de4dc8ac054795b
             _spriteBatch.End();
             base.Draw(gameTime);
         }
