@@ -164,7 +164,6 @@ namespace SAE
                 {
                     enemy.Draw(_spriteBatch);
                 }
-                
             }
 
                 
