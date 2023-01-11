@@ -29,7 +29,7 @@ namespace SAE
         public static Vector2 _resetPosition;
         public static int _viePerso;
         public static Rectangle colisionPerso;
-        
+        public static bool _attaque;
 
 
         public Perso()
