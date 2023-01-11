@@ -28,11 +28,12 @@ namespace SAE
         public static KeyboardState keyboardState;
         public static Vector2 _resetPosition;
         public static int _viePerso;
+        public static bool _attaque;
 
 
         public Perso()
         {
-
+            
 
         }
         public static void Initialize()
@@ -44,6 +45,7 @@ namespace SAE
             _viePerso = 100;
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
+            bool _attaque = true;
         }
         public static void LoadContent(Game game)
         {
@@ -133,6 +135,11 @@ namespace SAE
             //                      ANIMATION
             //######################################################
 
+
+            if(_attaque == true)
+            {
+
+            }
             if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
             {
                 if (_sens == "haut")
