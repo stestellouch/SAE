@@ -20,6 +20,10 @@ namespace SAE
         public int _vieMonstre;
         public bool _estEnVie;
         public Rectangle collision;
+        public static float _compteurAttaqueMonstre;
+        public static float _compteurAttaquePerso;
+        public static bool _attaqueMonstre;
+        public static bool _attaquePerso;
 
         public bool isVisible = true;
 
@@ -36,6 +40,12 @@ namespace SAE
             _vieMonstre = vie;
             _estEnVie = enVie;
 
+            _compteurAttaqueMonstre = 0;
+            _compteurAttaquePerso = 0;
+
+            _attaqueMonstre = true;
+            _attaquePerso = true;
+
             originWidth = (_texture.Width / 2);
             originHeight = (_texture.Height / 2);
 
@@ -48,6 +58,11 @@ namespace SAE
         {
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            _compteurAttaquePerso += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _compteurAttaqueMonstre += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+
             float walkSpeed = (float)(deltaTime * (Perso._vitessePerso - 30));
             //Si le monstre est à droite du personnage
             if (this._position.X+25 >= Perso._positionPerso.X && _estEnVie == true)
@@ -78,18 +93,32 @@ namespace SAE
             ///////////////////////////////////////////////
             if ((Perso.colisionPerso.X -35)<= (this.collision.X ) && (Perso.colisionPerso.X+64 ) >= (this.collision.X)
                 && (Perso.colisionPerso.Y -30) <= (this.collision.Y ) && (Perso.colisionPerso.Y+64 ) >= (this.collision.Y)
-                && Perso.keyboardState.IsKeyDown(Keys.Space))
+                && Perso.keyboardState.IsKeyDown(Keys.Space) && _attaquePerso == true)
             {
                 this._vieMonstre -= 25;
                 Console.WriteLine("attaque");
+                _attaquePerso = false;
+                _compteurAttaquePerso = 0;
+                Console.WriteLine(_vieMonstre);
             }
-            if (this.collision.Intersects(Perso.colisionPerso) && _estEnVie == true)
+            if(_compteurAttaquePerso > 2)
+            {
+                _attaquePerso = true;
+            }
+
+
+            if (collision.Intersects(Perso.colisionPerso) && _estEnVie == true && _attaqueMonstre == true)
             {
                Console.WriteLine("Collision");
+                _compteurAttaqueMonstre = 0;
+                _attaqueMonstre = false;
                Perso._viePerso -= 10;
                 
             }
-
+            if(_compteurAttaqueMonstre >5)
+            {
+                _attaqueMonstre = true;
+            }
            
 
             if (this._vieMonstre <= 0)
