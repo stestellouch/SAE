@@ -156,7 +156,7 @@ namespace SAE
             Perso.Draw(_spriteBatch);
 
             //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
-            foreach (Enemies enemy in enemies)
+            foreach (Enemies enemy in _enemies)
             {
                 if (enemy._estEnVie == true)
                 {
@@ -175,7 +175,7 @@ namespace SAE
             int randX = random.Next(0, 100);
             int vie = 50;
             bool enVie = true;
-            if (spawn >= tempsCreationEnemie)
+            if (_spawn >= _tempsCreationEnemie)
             {
                 _spawn = 0; //On remet spawn à 0 pour remonter jusque 10 etc.
                 
