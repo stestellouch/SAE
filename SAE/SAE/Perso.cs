@@ -28,7 +28,8 @@ namespace SAE
         public static KeyboardState keyboardState;
         public static Vector2 _resetPosition;
         public static int _viePerso;
-        public static bool _attaque;
+        public static Rectangle colisionPerso;
+        
 
 
         public Perso()
@@ -45,7 +46,8 @@ namespace SAE
             _viePerso = 100;
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
-            bool _attaque = true;
+            
+            colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y,  64,64);
         }
         public static void LoadContent(Game game)
         {
@@ -82,6 +84,7 @@ namespace SAE
                         _positionPerso.Y -= walkSpeed;
                         _sens = "haut";
                         _Perso.Play("up_Walk");
+                        
                     }
 
 
@@ -97,6 +100,7 @@ namespace SAE
                         _positionPerso.Y += walkSpeed;
                         _sens = "bas";
                         _Perso.Play("down_Walk");
+                        
                     }
 
                 }
@@ -110,6 +114,7 @@ namespace SAE
                         _positionPerso.X += walkSpeed;
                         _sens = "droite";
                         _Perso.Play("right_Walk");
+                        
                     }
 
 
@@ -126,8 +131,11 @@ namespace SAE
                         _positionPerso.X -= walkSpeed;
                         _sens = "gauche";
                         _Perso.Play("left_Walk");
+                        
                     }
                 }
+                colisionPerso.X = (int)_positionPerso.X;
+                colisionPerso.Y = (int)_positionPerso.Y;
             }
             if (keyboardState.IsKeyDown(Keys.Tab))
                 _positionPerso = _resetPosition;
