@@ -14,7 +14,7 @@ namespace SAE
         public double originHeight;
         public int _vieMonstre;
         public bool _estEnVie;
-        public Rectangle ContourMonstre;
+        public Rectangle Collision;
 
         public bool isVisible = true;
          
@@ -28,9 +28,12 @@ namespace SAE
             
             originWidth = (_texture.Width / 2);
             originHeight = (_texture.Height / 2);
+            
 
 
         }
+        
+        
         public void Update(GraphicsDevice graphics, GameTime gameTime)
         {
 

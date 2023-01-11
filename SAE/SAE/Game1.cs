@@ -158,7 +158,7 @@ namespace SAE
 
             //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
             foreach (Enemies enemy in enemies)
-                if (enemy._estEnVie)
+                if (enemy._estEnVie == true)
                     enemy.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
