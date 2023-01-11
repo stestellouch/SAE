@@ -29,10 +29,6 @@ namespace SAE
         public static Vector2 _resetPosition;
         public static int _viePerso;
         public static Rectangle colisionPerso;
-        public static bool _attaque;
-        public static float _compteurAttaque ;
-
-        public static bool estEnViePerso = true;
 
         public Perso()
         {
@@ -48,8 +44,6 @@ namespace SAE
             _viePerso = 100;
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
-            _attaque = true;
-            _compteurAttaque = 0;
             colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
         }
         public static void LoadContent(Game game)
@@ -66,7 +60,6 @@ namespace SAE
             
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _compteurAttaque += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
             _Perso.Update(deltaTime);
@@ -150,8 +143,7 @@ namespace SAE
             //######################################################
 
 
-            if(_attaque == true)
-            {
+            
                 if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
                 {
                     if (_sens == "haut")
@@ -175,14 +167,10 @@ namespace SAE
                         _Perso.Play("left_swing");
                         attaque = "attaque gauche";
                     }
-                    _attaque = false;
-                    _compteurAttaque = 0;
-                }
+                    
+                    
+                
 
-            }
-            if(_compteurAttaque >2)
-            {
-                _attaque = true;
             }
             
 
