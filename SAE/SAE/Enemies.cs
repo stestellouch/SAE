@@ -6,22 +6,22 @@ namespace SAE
 {
     class Enemies
     {
-        public Texture2D texture;
-        public Vector2 position;
+        public Texture2D _textureEnemy;
+        public Vector2 _positionEnemy;
         //Rectangle fantome;
-        public double originWidth;
-        public double originHeight;
+        public double _originWidth;
+        public double _originHeight;
 
         public bool isVisible = true;
          
 
         public Enemies(Texture2D newTexture, Vector2 newPosition)
         {
-            texture = newTexture;
-            position = newPosition;
+            _textureEnemy = newTexture;
+            _positionEnemy = newPosition;
             
-            originWidth = (texture.Width / 2);
-            originHeight = (texture.Height / 2);
+            _originWidth = (_textureEnemy.Width / 2);
+            _originHeight = (_textureEnemy.Height / 2);
 
 
         }
@@ -31,29 +31,29 @@ namespace SAE
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = (float)(deltaTime * (Perso._vitessePerso -30));
             //Si le monstre est à droite du personnage
-            if (this.position.X > Perso._positionPerso.X-originWidth)
+            if (this._positionEnemy.X > Perso._positionPerso.X-_originWidth)
             {
-                position.X -= walkSpeed;
+                _positionEnemy.X -= walkSpeed;
             }
             
-            if (this.position.X < Perso._positionPerso.X)
+            if (this._positionEnemy.X < Perso._positionPerso.X)
             {
-                position.X += walkSpeed;
+                _positionEnemy.X += walkSpeed;
             }
             //Si le monstre est au dessous du personnage
-            if (this.position.Y > Perso._positionPerso.Y- originHeight)
+            if (this._positionEnemy.Y > Perso._positionPerso.Y- _originHeight)
             {
-                position.Y -= walkSpeed;
+                _positionEnemy.Y -= walkSpeed;
             }
                         
-            if (this.position.Y < Perso._positionPerso.Y)
+            if (this._positionEnemy.Y < Perso._positionPerso.Y)
             {
-                position.Y += walkSpeed;
+                _positionEnemy.Y += walkSpeed;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(_textureEnemy, _positionEnemy, Color.White);
 
 
         }
