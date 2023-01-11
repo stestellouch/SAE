@@ -78,6 +78,12 @@
 /processorParam:TextureFormat=Color
 /build:Animation/sprite_0.png
 
+#begin Birds and Wind - Ambient.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Birds and Wind - Ambient.mp3
+
 #begin Caketown 1.mp3
 /importer:Mp3Importer
 /processor:SongProcessor

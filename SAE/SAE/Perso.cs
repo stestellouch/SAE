@@ -13,6 +13,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
+using Microsoft.Xna.Framework.Media;
 
 namespace SAE
 {
@@ -169,9 +170,15 @@ namespace SAE
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
             if (World.mapLayer.TryGetTile(x, y, out tile) == false)
+            {
                 return false;
+
+            }
             if (!tile.Value.IsBlank)
+            {
                 return true;
+                
+            }
             return false;
         }
     }
