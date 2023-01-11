@@ -50,51 +50,53 @@ namespace SAE
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = (float)(deltaTime * (Perso._vitessePerso - 30));
             //Si le monstre est à droite du personnage
-            if (this._position.X >= Perso._positionPerso.X && _estEnVie == true)
+            if (this._position.X-30 >= Perso._positionPerso.X && _estEnVie == true)
             {
                 this._position.X -= walkSpeed;
                 //this.collision.X -= (int)walkSpeed;
             }
             //Si le monstre est à gauche du personnage
-            if (this._position.X <= Perso._positionPerso.X && _estEnVie == true)
+            if (this._position.X-30 <= Perso._positionPerso.X && _estEnVie == true)
             {
                 this._position.X += walkSpeed;
                 //this.collision.X += (int)walkSpeed;
             }
             //Si le monstre est au dessous du personnage
-            if (this._position.Y >= Perso._positionPerso.Y && _estEnVie == true)
+            if (this._position.Y+30 >= Perso._positionPerso.Y && _estEnVie == true)
             {
                 this._position.Y -= walkSpeed;
                 //this.collision.Y -= (int)walkSpeed;
             }
             //Si le monstre est au dessus du personnage            
-            if (this._position.Y <= Perso._positionPerso.Y && _estEnVie == true)
+            if (this._position.Y+30 <= Perso._positionPerso.Y && _estEnVie == true)
             {
                 this._position.Y += walkSpeed;
                 //this.collision.Y += (int)walkSpeed;
             }
-            this.collision.X = (int)this._position.X;
-            this.collision.Y = (int)this._position.Y;
+            this.collision.X = (int)this._position.X-30;
+            this.collision.Y = (int)this._position.Y+30;
             ///////////////////////////////////////////////
             ///                Degats                   ///
             ///////////////////////////////////////////////
-            ///
+
             Console.WriteLine(Perso.colisionPerso.X + " perso" + Perso.colisionPerso.Y);
             Console.WriteLine(this.collision.X + " fantome" + this.collision.Y);
-            //if (Perso.colisionPerso.X<= this.collision.X && Perso.colisionPerso.X+64 >= this.collision.X 
-            //    && Perso.colisionPerso.Y <= this.collision.Y && Perso.colisionPerso.Y +64 >= this.collision.Y)
+            if ((Perso.colisionPerso.X)<= (this.collision.X ) && (Perso.colisionPerso.X+64) >= (this.collision.X)
+                && (Perso.colisionPerso.Y) <= (this.collision.Y ) && (Perso.colisionPerso.Y+64) >= (this.collision.Y)
+                && Perso.keyboardState.IsKeyDown(Keys.Space))
+            {
+                this._vieMonstre -= 25;
+                Console.WriteLine("attaque");
+            }
             if (this.collision.Intersects(Perso.colisionPerso))
             {
-                Console.WriteLine("Collision");
-                if (Perso.keyboardState.IsKeyDown(Keys.Space))
-                {
-                    this._vieMonstre -= 25;
-                }
-                else
-                {
-                    Perso._viePerso -= 10;
-                }
+               Console.WriteLine("Collision");
+               
+               
+               Perso._viePerso -= 10;
+                
             }
+
             //else if (Perso._positionPerso.X == this._position.Y)
             //{
             //    Console.WriteLine("Collision");
