@@ -24,8 +24,9 @@ namespace SAE
         public static int _sensPersoY;
         public static float _vitessePerso;
         public static string _sens;
-        public static KeyboardState _keyboardState;
+        public static KeyboardState keyboardState;
         public static Vector2 _resetPosition;
+        public static int _viePerso;
 
 
         public Perso()
@@ -40,6 +41,7 @@ namespace SAE
             _sensPersoY = 0;
             _sensPersoX = 0;
             _vitessePerso = 100;
+            _viePerso = 100;
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
         }
@@ -58,10 +60,10 @@ namespace SAE
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _Perso.Update(deltaTime);
-            _keyboardState = Keyboard.GetState();
             float walkSpeed = deltaTime * Perso._vitessePerso; // Vitesse de déplacement du sprite
-            KeyboardState keyboardState = Keyboard.GetState();
+            keyboardState = Keyboard.GetState();
             String animation = "none";
+            String attaque = "none";
             
             if (!(keyboardState.IsKeyDown(Keys.Z) || keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Q)))
                 animation = "idle";
@@ -133,10 +135,27 @@ namespace SAE
 
             if (animation == "idle" && keyboardState.IsKeyDown(Keys.Space))
             {
-                if (_sens == "haut") _Perso.Play("up_swing");
-                else if (_sens == "bas") _Perso.Play("down_swing");
-                else if (_sens == "droite") _Perso.Play("right_swing");
-                else if (_sens == "gauche") _Perso.Play("left_swing");
+                if (_sens == "haut")
+                {
+                    _Perso.Play("up_swing");
+                    attaque = "attaque haut";
+                }
+
+                else if (_sens == "bas")
+                {
+                    _Perso.Play("down_swing");
+                    attaque = "attaque bas";
+                }
+                else if (_sens == "droite")
+                {
+                    _Perso.Play("right_swing");
+                    attaque = "attaque droite";
+                }
+                else if (_sens == "gauche")
+                {
+                    _Perso.Play("left_swing");
+                    attaque = "attaque gauche";
+                }
             }
         }
         public static void Draw(SpriteBatch _spriteBatch)

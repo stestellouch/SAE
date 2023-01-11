@@ -135,7 +135,8 @@ namespace SAE
             Perso.Draw(_spriteBatch);
 
             foreach (Enemies enemy in enemies)
-                enemy.Draw(_spriteBatch);
+                if (enemy._estEnVie)
+                    enemy.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -143,22 +144,17 @@ namespace SAE
         {
             int randY = random.Next(0, ScreenHeight);
             int randX = random.Next(0, ScreenWidth);
+            int vie = 50;
+            bool enVie = true;
             if (spawn >= tempsCreationEnemie)
             {
                 spawn = 0;
                 
                 
-                enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));
+                enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY), vie, enVie));
                 
             }
-            for (int i = 0; i < enemies.Count(); i++)
-            {
-                if (!enemies[i].isVisible)
-                {
-                    enemies.RemoveAt(i);
-                    i--;
-                }
-            }
+            
         }
     }
 }
