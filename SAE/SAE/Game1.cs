@@ -38,6 +38,7 @@ namespace SAE
         public static int ScreenHeight;
         public static int ScreenWidth;
 
+        private KeyboardState keyboardState, lastKeyboardState;
 
         public Game1()
         {
@@ -109,8 +110,21 @@ namespace SAE
             //Pour sortir du jeux plus facillement
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            World.Update(gameTime);           
-            
+            World.Update(gameTime);
+
+            //Quand on appuie sur P ça met la musique en mute (sur pause)
+            keyboardState = Keyboard.GetState();
+
+            if (keyboardState.IsKeyDown(Keys.P) && lastKeyboardState.IsKeyUp(Keys.P))
+            {
+                // P button has been pressed - change MediaPlayer state
+                if (MediaPlayer.State == MediaState.Paused) // Paused to playing
+                    MediaPlayer.Resume();
+                else if (MediaPlayer.State == MediaState.Playing) // Playing to paused
+                    MediaPlayer.Pause();
+            }
+            lastKeyboardState = keyboardState;
+
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
 
@@ -119,7 +133,6 @@ namespace SAE
             Perso.Update(gameTime); //A besoin d'être constamment update pour bouger le perso et faire les animations
             Camera.Update(gameTime); //A besoin d'être constamment update pour suivre le perso et donc changer ce qu'on voit
 
-            KeyboardState keyboardState = Keyboard.GetState();
             
             //Appelle a LoadEnemies pour créer les enemies en utilisant une boucle grâce à la liste
             spawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Le compteur pour spawn (utilisé dans LoadEnemies)
@@ -162,8 +175,10 @@ namespace SAE
             {
                 spawn = 0; //On remet spawn à 0 pour remonter jusque 10 etc.
                 
+                MediaPlayer.Pause();
                 enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));//Ajout d'un monstre
                 
+                MediaPlayer.Resume();
             }
             
         }
