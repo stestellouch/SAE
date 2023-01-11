@@ -12,6 +12,7 @@ using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Linq;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SAE
 {
@@ -30,8 +31,8 @@ namespace SAE
         float tempsJeux = 0;
         public int tempsCreationEnemie = 10;
 
-        //son
-        public static Song _musique;
+        //création son
+        public  Song _musique;
 
         //taille écran pour caméra
         public static int ScreenHeight;
@@ -59,16 +60,16 @@ namespace SAE
             ScreenWidth = _graphics.PreferredBackBufferWidth;
             _graphics.ApplyChanges();
 
-            //création de la map
+            //création de la map, appel à Initialize de la classe World
             World.Initialize();
-            
+
 
             //création de la caméra
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
+            BoxingViewportAdapter viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
             Camera.Initialize(viewportadapter);
 
 
-            //son
+            //jouer le son son en boucle
             MediaPlayer.IsRepeating = true;
 
             base.Initialize();
@@ -77,13 +78,16 @@ namespace SAE
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            //appel au loadcontent des deux classes
             World.LoadContent(this);
             Perso.LoadContent(this);
 
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            //load de la musique
             _musique = Content.Load<Song>("Caketown 1");
+            //Jouer la musique
             MediaPlayer.Play(_musique);
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -91,6 +95,8 @@ namespace SAE
 
             //compteur temps jeux 
             tempsJeux += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //Si temps de jeux est de 30 secondes alors les enemies spawn à un rythme de 1 secondes plus vite
+            //Note : seulement jusqu'à 3 secondes car après ça irait trop vite, trop de monstres
             if(tempsJeux %30 == 0)
             {
                 if(tempsCreationEnemie >= 3)
@@ -100,6 +106,7 @@ namespace SAE
                 }
             }
 
+            //Pour sortir du jeux plus facillement
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             World.Update(gameTime);           
@@ -107,15 +114,16 @@ namespace SAE
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
 
-            Perso.Update(gameTime);
-            Camera.Update(gameTime);
+
+            //appel à l'update des deux classes
+            Perso.Update(gameTime); //A besoin d'être constamment update pour bouger le perso et faire les animations
+            Camera.Update(gameTime); //A besoin d'être constamment update pour suivre le perso et donc changer ce qu'on voit
 
             KeyboardState keyboardState = Keyboard.GetState();
             
-            //Appelle a LoadEnemies pour créer les enemies
-            
-            spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            foreach (Enemies enemy in enemies)
+            //Appelle a LoadEnemies pour créer les enemies en utilisant une boucle grâce à la liste
+            spawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Le compteur pour spawn (utilisé dans LoadEnemies)
+            foreach (Enemies enemy in enemies) //Création d'une variable locale pour représenter chaque monstre présent dans la classe Enemies et donc la liste enemies
                 enemy.Update(_graphics.GraphicsDevice, gameTime);
             LoadEnemies();
 
@@ -127,38 +135,37 @@ namespace SAE
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            var transformMatrix = Camera._camera.GetViewMatrix();
+            //création de la matrice afin d'ajuster la caméra pour l'appel draw
+            Matrix transformMatrix = Camera._camera.GetViewMatrix();
 
-            //affichage avec caméra
+            //affichage avec caméra avec la matrice comme paramètre pour ce qui nécessite d'être zoomer : la map
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             World.Draw(transformMatrix);
             Perso.Draw(_spriteBatch);
 
+            //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
             foreach (Enemies enemy in enemies)
                 enemy.Draw(_spriteBatch);
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }
         public void LoadEnemies()
         {
+
+            //Création des positions random des monstres
             int randY = random.Next(0, ScreenHeight);
             int randX = random.Next(0, ScreenWidth);
-            if (spawn >= tempsCreationEnemie)
+
+            //Création des fantome en fonction du compteur spawn créé précedement
+            if (spawn >= tempsCreationEnemie) //Pour bien créer toutes les 10 secondes
             {
-                spawn = 0;
+                spawn = 0; //On remet spawn à 0 pour remonter jusque 10 etc.
                 
-                
-                enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));
+                enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY)));//Ajout d'un monstre
                 
             }
-            for (int i = 0; i < enemies.Count(); i++)
-            {
-                if (!enemies[i].isVisible)
-                {
-                    enemies.RemoveAt(i);
-                    i--;
-                }
-            }
+            
         }
     }
 }
