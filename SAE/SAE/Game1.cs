@@ -24,19 +24,19 @@ namespace SAE
         public  KeyboardState _keyboardState;
         //public static float deltaSeconds;
         //Création enemies
-        List<Enemies> enemies = new List<Enemies>();
+        List<Enemies> _enemies = new List<Enemies>();
         Random random = new Random();
         //Créations des différents compteurs
-        float spawn = 0;
-        float tempsJeux = 0;
-        public int tempsCreationEnemie = 10;
+        float _spawn = 0;
+        float _tempsJeu = 0;
+        public int _tempsCreationEnemie = 10;
 
         //création son
         public  Song _musique;
 
         //taille écran pour caméra
-        public static int ScreenHeight;
-        public static int ScreenWidth;
+        public static int _screenHeight;
+        public static int _screenWidth;
 
         private KeyboardState keyboardState, lastKeyboardState;
 
@@ -56,9 +56,9 @@ namespace SAE
                        
             //création de la taille de la fenêtre
             _graphics.PreferredBackBufferHeight = 900;
-            ScreenHeight= _graphics.PreferredBackBufferHeight;
+            _screenHeight= _graphics.PreferredBackBufferHeight;
             _graphics.PreferredBackBufferWidth = 1480;
-            ScreenWidth = _graphics.PreferredBackBufferWidth;
+            _screenWidth = _graphics.PreferredBackBufferWidth;
             _graphics.ApplyChanges();
 
             //création de la map, appel à Initialize de la classe World
@@ -66,7 +66,7 @@ namespace SAE
 
 
             //création de la caméra
-            BoxingViewportAdapter viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
+            BoxingViewportAdapter viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
             Camera.Initialize(viewportadapter);
 
 
@@ -95,14 +95,14 @@ namespace SAE
         {
 
             //compteur temps jeux 
-            tempsJeux += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _tempsJeu += (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Si temps de jeux est de 30 secondes alors les enemies spawn à un rythme de 1 secondes plus vite
             //Note : seulement jusqu'à 3 secondes car après ça irait trop vite, trop de monstres
-            if(tempsJeux %30 == 0)
+            if(_tempsJeu %20 == 0)
             {
-                if(tempsCreationEnemie >= 3)
+                if(_tempsCreationEnemie >= 3)
                 {
-                    tempsCreationEnemie -= 1;
+                    _tempsCreationEnemie -= 1;
 
                 }
             }
@@ -135,11 +135,10 @@ namespace SAE
 
             
             //Appelle a LoadEnemies pour créer les enemies en utilisant une boucle grâce à la liste
-            spawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Le compteur pour spawn (utilisé dans LoadEnemies)
-            foreach (Enemies enemy in enemies) //Création d'une variable locale pour représenter chaque monstre présent dans la classe Enemies et donc la liste enemies
+            _spawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Le compteur pour spawn (utilisé dans LoadEnemies)
+            foreach (Enemies enemy in _enemies) //Création d'une variable locale pour représenter chaque monstre présent dans la classe Enemies et donc la liste enemies
                 enemy.Update(_graphics.GraphicsDevice, gameTime);
             LoadEnemies();
-
 
             base.Update(gameTime);
         }
@@ -178,9 +177,9 @@ namespace SAE
             bool enVie = true;
             if (spawn >= tempsCreationEnemie)
             {
-                spawn = 0; //On remet spawn à 0 pour remonter jusque 10 etc.
+                _spawn = 0; //On remet spawn à 0 pour remonter jusque 10 etc.
                 
-                enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY), vie, enVie));
+                _enemies.Add(new Enemies(Content.Load<Texture2D>("Animation/sprite_0"), new Vector2(randX, randY), 100, true));//Ajout d'un monstre
                 
             }
             

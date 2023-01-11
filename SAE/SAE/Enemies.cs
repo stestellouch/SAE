@@ -7,6 +7,11 @@ namespace SAE
 {
     class Enemies
     {
+        public Texture2D _textureEnemy;
+        public Vector2 _positionEnemy;
+        //Rectangle fantome;
+        public double _originWidth;
+        public double _originHeight;
         public Texture2D _texture;
         public Vector2 _position;
         //Rectangle fantome;
@@ -21,6 +26,11 @@ namespace SAE
 
         public Enemies(Texture2D newTexture, Vector2 newPosition, int vie, bool enVie)
         {
+            _textureEnemy = newTexture;
+            _positionEnemy = newPosition;
+            
+            _originWidth = (_textureEnemy.Width / 2);
+            _originHeight = (_textureEnemy.Height / 2);
             _texture = newTexture;
             _position = newPosition;
             _vieMonstre = vie;
@@ -127,12 +137,13 @@ namespace SAE
             //else if (Perso._viePerso <= 0)
             //{
 
-            //}
-
+                //}
+            }
            
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(_textureEnemy, _positionEnemy, Color.White);
             spriteBatch.Draw(_texture, _position, Color.White);
 
 
