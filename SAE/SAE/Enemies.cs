@@ -90,7 +90,11 @@ namespace SAE
                 
             }
 
-           
+            if (Perso._viePerso <= 0)
+            {
+                Perso.estEnViePerso = false;
+                
+            }
 
             if (this._vieMonstre <= 0)
             {

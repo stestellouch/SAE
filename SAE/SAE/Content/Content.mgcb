@@ -462,6 +462,18 @@
 /processorParam:TextureFormat=Color
 /build:Tile/PNG/icon/free_icons2.png
 
+#begin Tile/PNG/icon/gameover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile/PNG/icon/gameover.png
+
 #begin Tile/PNG/lava/free_lava_tiles1.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -32,6 +32,7 @@ namespace SAE
         public static bool _attaque;
         public static float _compteurAttaque ;
 
+        public static bool estEnViePerso = true;
 
         public Perso()
         {

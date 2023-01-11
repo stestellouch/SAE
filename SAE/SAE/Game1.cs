@@ -40,6 +40,7 @@ namespace SAE
 
         private KeyboardState keyboardState, lastKeyboardState;
 
+        public static Texture2D _gameover;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -87,6 +88,9 @@ namespace SAE
             _musique = Content.Load<Song>("Caketown 1");
             //Jouer la musique
             MediaPlayer.Play(_musique);
+
+            //load gameover
+            _gameover = Content.Load<Texture2D>("gameover");
 
 
         }
@@ -140,36 +144,55 @@ namespace SAE
                 enemy.Update(_graphics.GraphicsDevice, gameTime);
             LoadEnemies();
 
+            if(Perso.estEnViePerso == false)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                    Perso.estEnViePerso = true;
+
+            }
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            //création de la matrice afin d'ajuster la caméra pour l'appel draw
-            Matrix transformMatrix = Camera._camera.GetViewMatrix();
-
-            //affichage avec caméra avec la matrice comme paramètre pour ce qui nécessite d'être zoomer : la map
-            _spriteBatch.Begin(transformMatrix: transformMatrix);
-            World.Draw(transformMatrix);
-            Perso.Draw(_spriteBatch);
-
-            //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
-            
-            foreach (Enemies enemy in _enemies)
-
+            if (Perso.estEnViePerso == true)
             {
-                if (enemy._estEnVie == true)
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                //création de la matrice afin d'ajuster la caméra pour l'appel draw
+                Matrix transformMatrix = Camera._camera.GetViewMatrix();
+
+                //affichage avec caméra avec la matrice comme paramètre pour ce qui nécessite d'être zoomer : la map
+                _spriteBatch.Begin(transformMatrix: transformMatrix);
+                World.Draw(transformMatrix);
+                Perso.Draw(_spriteBatch);
+
+                //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
+
+                foreach (Enemies enemy in _enemies)
+
                 {
-                    enemy.Draw(_spriteBatch);
+                    if (enemy._estEnVie == true)
+                    {
+                        enemy.Draw(_spriteBatch);
+                    }
+
                 }
+
+
+
+
+                _spriteBatch.End();
             }
+            else
+            {
+                _spriteBatch.Begin();
+                GraphicsDevice.Clear(Color.Orange);
+                _spriteBatch.Draw(_gameover, new Vector2(0, 0), Color.White);
 
-                
-
-
-            _spriteBatch.End();
+                _spriteBatch.End();
+            }
             base.Draw(gameTime);
         }
         public void LoadEnemies()
