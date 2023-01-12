@@ -13,7 +13,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
-using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SAE
 {
@@ -36,6 +36,9 @@ namespace SAE
         public static int _score;
         public static Vector2 _positionScore;
         public static SpriteFont _police;
+
+        //création sound effect quand on frappe
+        public static SoundEffect _sonAttaque;
 
         public Perso()
         {
@@ -63,6 +66,8 @@ namespace SAE
              _Perso = new AnimatedSprite(SpriteMC);
 
             _police = game.Content.Load<SpriteFont>("Font");
+
+            _sonAttaque = game.Content.Load<SoundEffect>("HP5TWBW-sword");
 
         }
         public static void Update(GameTime gameTime)
@@ -174,7 +179,6 @@ namespace SAE
                 {
                     _Perso.Play("left_swing");
                 }
-
             }
 
             if (_viePerso <= 0)

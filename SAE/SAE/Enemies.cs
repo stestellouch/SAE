@@ -99,6 +99,7 @@ namespace SAE
                 _attaquePerso = false;
                 _compteurAttaquePerso = 0;
                 Perso._score = Perso._score + 10;
+                Perso._sonAttaque.Play();
                 Console.WriteLine(_vieMonstre);
             }
             if(_compteurAttaquePerso > 2)

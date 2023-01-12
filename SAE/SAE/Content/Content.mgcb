@@ -78,12 +78,6 @@
 /processorParam:TextureFormat=Color
 /build:Animation/sprite_0.png
 
-#begin Birds and Wind - Ambient.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Birds and Wind - Ambient.mp3
-
 #begin Caketown 1.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -96,6 +90,12 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
+
+#begin HP5TWBW-sword.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:HP5TWBW-sword.wav
 
 #begin Tile/PNG/character/$_srw_free_character_nude.png
 /importer:TextureImporter
