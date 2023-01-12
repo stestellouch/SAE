@@ -44,7 +44,7 @@ namespace SAE
         }
         public static void Initialize()
         {
-            _positionPerso = new Vector2(50,50);
+            _positionPerso = new Vector2(1300,1300);
             _sensPersoY = 0;
             _sensPersoX = 0;
             _vitessePerso = 100;
