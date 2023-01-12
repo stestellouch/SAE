@@ -29,7 +29,7 @@ namespace SAE
         public static Vector2 _resetPosition;
         public static int _viePerso;
         public static Rectangle colisionPerso;
-        public static bool estEnViePerso = true;
+        public static bool estEnViePerso;
 
         public Perso()
         {
@@ -44,6 +44,7 @@ namespace SAE
             _vitessePerso = 100;
             _viePerso = 100;
             _sens = "nothing";
+            estEnViePerso = true;
             _resetPosition = new Vector2(50, 50);
             colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
         }

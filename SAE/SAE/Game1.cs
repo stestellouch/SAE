@@ -140,14 +140,23 @@ namespace SAE
             
             //Appelle a LoadEnemies pour créer les enemies en utilisant une boucle grâce à la liste
             _spawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Le compteur pour spawn (utilisé dans LoadEnemies)
-            foreach (Enemies enemy in _enemies) //Création d'une variable locale pour représenter chaque monstre présent dans la classe Enemies et donc la liste enemies
-                enemy.Update(_graphics.GraphicsDevice, gameTime);
-            LoadEnemies();
-
+            if (Perso.estEnViePerso == true)
+            {
+                foreach (Enemies enemy in _enemies) //Création d'une variable locale pour représenter chaque monstre présent dans la classe Enemies et donc la liste enemies
+                    enemy.Update(_graphics.GraphicsDevice, gameTime);
+                LoadEnemies();
+            }
             if(Perso.estEnViePerso == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Enter))
-                    Perso.estEnViePerso = true;
+                {
+                    //foreach (Enemies enemy in _enemies)
+                    //    enemy._estEnVie = false;
+                    _enemies.RemoveAll(Restart);
+                    Initialize();
+                    
+                }
+
 
             }
 
@@ -170,14 +179,17 @@ namespace SAE
 
                 //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
 
-                foreach (Enemies enemy in _enemies)
-
+                if (Perso.estEnViePerso == true)
                 {
-                    if (enemy._estEnVie == true)
-                    {
-                        enemy.Draw(_spriteBatch);
-                    }
+                    foreach (Enemies enemy in _enemies)
 
+                    {
+                        if (enemy._estEnVie == true)
+                        {
+                            enemy.Draw(_spriteBatch);
+                        }
+
+                    }
                 }
 
 
@@ -212,5 +224,10 @@ namespace SAE
             }
             
         }
+        public static bool Restart(Enemies monstre)
+        {
+            return monstre._estEnVie == true;
+        }
+
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace SAE
 {
-    class Enemies
+    public class Enemies
     {
         public Texture2D _textureEnemy;
         public Vector2 _positionEnemy;
@@ -22,8 +22,8 @@ namespace SAE
         public Rectangle collision;
         public static float _compteurAttaqueMonstre;
         public static float _compteurAttaquePerso;
-        public static bool _attaqueMonstre;
-        public static bool _attaquePerso;
+        public bool _attaqueMonstre;
+        public bool _attaquePerso;
 
         public bool isVisible = true;
 
@@ -43,8 +43,7 @@ namespace SAE
             _compteurAttaqueMonstre = 0;
             _compteurAttaquePerso = 0;
 
-            _attaqueMonstre = true;
-            _attaquePerso = true;
+            
 
             originWidth = (_texture.Width / 2);
             originHeight = (_texture.Height / 2);
@@ -91,9 +90,9 @@ namespace SAE
             ///////////////////////////////////////////////
             ///                Degats                   ///
             ///////////////////////////////////////////////
-            if ((Perso.colisionPerso.X -35)<= (this.collision.X ) && (Perso.colisionPerso.X+64 ) >= (this.collision.X)
+            if (((Perso.colisionPerso.X -45)<= (this.collision.X ) && (Perso.colisionPerso.X+64 ) >= (this.collision.X)
                 && (Perso.colisionPerso.Y -30) <= (this.collision.Y ) && (Perso.colisionPerso.Y+64 ) >= (this.collision.Y)
-                && Perso.keyboardState.IsKeyDown(Keys.Space) && _attaquePerso == true)
+                && Perso.keyboardState.IsKeyDown(Keys.Space)) && _attaquePerso == true)
             {
                 this._vieMonstre -= 50;
                 Console.WriteLine("attaque");
@@ -107,11 +106,11 @@ namespace SAE
             }
 
 
-            if (collision.Intersects(Perso.colisionPerso) && _estEnVie == true && _attaqueMonstre == true)
+            if (this.collision.Intersects(Perso.colisionPerso) && this._estEnVie == true && this._attaqueMonstre == true)
             {
                 Console.WriteLine("Collision");
                 _compteurAttaqueMonstre = 0;
-                _attaqueMonstre = false;
+                this._attaqueMonstre = false;
                 Perso._viePerso -= 10;
                 Console.WriteLine(Perso._viePerso);
                 
@@ -124,8 +123,11 @@ namespace SAE
 
             if (this._vieMonstre <= 0)
             {
-                _estEnVie = false;
+                this._estEnVie = false;
             }
+
+            //if (Perso.estEnViePerso == false)
+            //    this.
             
         }
 
