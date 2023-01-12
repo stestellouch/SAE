@@ -30,7 +30,7 @@ namespace SAE
         public static int _viePerso;
         public static Vector2 _positionVie;
         public static Rectangle colisionPerso;
-        public static bool estEnViePerso = true;
+        public static bool estEnViePerso;
 
         //création score du perso
         public static int _score;
@@ -50,6 +50,7 @@ namespace SAE
             _vitessePerso = 100;
             _viePerso = 100;
             _sens = "nothing";
+            estEnViePerso = true;
             _resetPosition = new Vector2(50, 50);
             colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
             _score = 0;
