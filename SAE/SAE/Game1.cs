@@ -90,7 +90,7 @@ namespace SAE
             MediaPlayer.Play(_musique);
 
             //load gameover
-            _gameover = Content.Load<Texture2D>("gameover");
+            _gameover = Content.Load<Texture2D>("gameover2");
 
 
         }
