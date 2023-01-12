@@ -23,6 +23,7 @@ namespace SAE
             _camera = new OrthographicCamera(viewportadapter);
             //La position de la caméra doit être égale à celle du personnage afin de le laisser au milieu constamment
             _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
+
             //Reglage du Zoom de la camera en float
             _camera.ZoomIn(1.5f); 
         }

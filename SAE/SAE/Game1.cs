@@ -170,7 +170,7 @@ namespace SAE
                 _spriteBatch.Begin(transformMatrix: transformMatrix);
                 World.Draw(transformMatrix);
                 Perso.Draw(_spriteBatch);
-
+                
                 //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
 
                 foreach (Enemies enemy in _enemies)

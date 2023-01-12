@@ -28,6 +28,7 @@ namespace SAE
         public static KeyboardState keyboardState;
         public static Vector2 _resetPosition;
         public static int _viePerso;
+        public static Vector2 _positionVie;
         public static Rectangle colisionPerso;
         public static bool estEnViePerso = true;
 
@@ -51,8 +52,8 @@ namespace SAE
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
             colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
-
-            _positionScore = new Vector2(Game1._screenHeight - 50, 0);
+            _score = 0;
+            
         }
         public static void LoadContent(Game game)
         {
@@ -67,10 +68,10 @@ namespace SAE
         {
             _sensPersoX = 0;
             _sensPersoY = 0;
-            
+            _positionScore = new Vector2(Camera._cameraPosition.X + 130, Camera._cameraPosition.Y + 130);
+            _positionVie = new Vector2(Camera._cameraPosition.X - 280, Camera._cameraPosition.Y + 130);
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
 
             _Perso.Update(deltaTime);
             float walkSpeed = deltaTime * Perso._vitessePerso; // Vitesse de déplacement du sprite
@@ -179,15 +180,12 @@ namespace SAE
                 estEnViePerso = false;
                 
 
-            
-            
-
         }
         public static void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.DrawString(_police, $"{(int)_score}", _positionScore, Color.White);
             _spriteBatch.Draw(_Perso, _positionPerso);
-        
+            _spriteBatch.DrawString(_police, $"Score : {(int)_score}", _positionScore, Color.White);
+            _spriteBatch.DrawString(_police, $"Vie : {(int)_viePerso}", _positionVie, Color.White);
         }
         public static bool IsCollision(ushort x, ushort y)
         {
