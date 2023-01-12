@@ -90,6 +90,13 @@
 /processorParam:Quality=Best
 /build:Caketown 1.mp3
 
+#begin Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font.spritefont
+
 #begin Tile/PNG/character/$_srw_free_character_nude.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -31,6 +31,7 @@ namespace SAE
         float _tempsJeu = 0;
         public int _tempsCreationEnemie = 10;
 
+
         //création son
         public  Song _musique;
 
@@ -73,7 +74,8 @@ namespace SAE
 
             //jouer le son son en boucle
             MediaPlayer.IsRepeating = true;
-
+                      
+           
             base.Initialize();
         }
 
@@ -88,6 +90,7 @@ namespace SAE
             _musique = Content.Load<Song>("Caketown 1");
             //Jouer la musique
             MediaPlayer.Play(_musique);
+
 
             //load gameover
             _gameover = Content.Load<Texture2D>("gameover");
@@ -116,15 +119,15 @@ namespace SAE
                 Exit();
             World.Update(gameTime);
 
-            //Quand on appuie sur P ça met la musique en mute (sur pause)
+            //Quand on appuie sur P ça met la musique en mute (sur pause) ou se ralume
             keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.P) && lastKeyboardState.IsKeyUp(Keys.P))
             {
-                // P button has been pressed - change MediaPlayer state
-                if (MediaPlayer.State == MediaState.Paused) // Paused to playing
+                
+                if (MediaPlayer.State == MediaState.Paused) 
                     MediaPlayer.Resume();
-                else if (MediaPlayer.State == MediaState.Playing) // Playing to paused
+                else if (MediaPlayer.State == MediaState.Playing) 
                     MediaPlayer.Pause();
             }
             lastKeyboardState = keyboardState;
@@ -179,7 +182,7 @@ namespace SAE
                     }
 
                 }
-
+                
 
 
 

@@ -31,6 +31,11 @@ namespace SAE
         public static Rectangle colisionPerso;
         public static bool estEnViePerso = true;
 
+        //création score du perso
+        public static int _score;
+        public static Vector2 _positionScore;
+        public static SpriteFont _police;
+
         public Perso()
         {
             
@@ -46,13 +51,17 @@ namespace SAE
             _sens = "nothing";
             _resetPosition = new Vector2(50, 50);
             colisionPerso = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, 32 ,32);
+
+            _positionScore = new Vector2(Game1._screenHeight - 50, 0);
         }
         public static void LoadContent(Game game)
         {
            
              SpriteSheet SpriteMC = game.Content.Load<SpriteSheet>("Animation/nouveau_perso/perso.sf", new JsonContentLoader());
              _Perso = new AnimatedSprite(SpriteMC);
-                
+
+            _police = game.Content.Load<SpriteFont>("Font");
+
         }
         public static void Update(GameTime gameTime)
         {
@@ -176,7 +185,7 @@ namespace SAE
         }
         public static void Draw(SpriteBatch _spriteBatch)
         {
-            
+            _spriteBatch.DrawString(_police, $"{(int)_score}", _positionScore, Color.White);
             _spriteBatch.Draw(_Perso, _positionPerso);
         
         }
