@@ -143,13 +143,13 @@ namespace SAE
             
             //Appelle a LoadEnemies pour créer les enemies en utilisant une boucle grâce à la liste
             _spawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Le compteur pour spawn (utilisé dans LoadEnemies)
-            if (Perso.estEnViePerso == true)
+            if (Perso._estEnViePerso == true)
             {
                 foreach (Enemies enemy in _enemies) //Création d'une variable locale pour représenter chaque monstre présent dans la classe Enemies et donc la liste enemies
                     enemy.Update(_graphics.GraphicsDevice, gameTime);
                 LoadEnemies();
             }
-            if(Perso.estEnViePerso == false)
+            if(Perso._estEnViePerso == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Enter))
                 {
@@ -168,7 +168,7 @@ namespace SAE
 
         protected override void Draw(GameTime gameTime)
         {
-            if (Perso.estEnViePerso == true)
+            if (Perso._estEnViePerso == true)
             {
                 GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -182,7 +182,7 @@ namespace SAE
                 
                 //Appelle a Draw pour dessiner les enemies en utilisant une boucle grâce à la liste (suite du LoadEnemies)
 
-                if (Perso.estEnViePerso == true)
+                if (Perso._estEnViePerso == true)
                 {
                     foreach (Enemies enemy in _enemies)
 

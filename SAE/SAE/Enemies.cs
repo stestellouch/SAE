@@ -20,8 +20,8 @@ namespace SAE
         public int _vieMonstre;
         public bool _estEnVie;
         public Rectangle collision;
-        public static float _compteurAttaqueMonstre;
-        public static float _compteurAttaquePerso;
+        public float _compteurAttaqueMonstre;
+        public float _compteurAttaquePerso;
         public bool _attaqueMonstre;
         public bool _attaquePerso;
 
@@ -90,8 +90,8 @@ namespace SAE
             ///////////////////////////////////////////////
             ///                Degats                   ///
             ///////////////////////////////////////////////
-            if (((Perso.colisionPerso.X -45)<= (this.collision.X ) && (Perso.colisionPerso.X+64 ) >= (this.collision.X)
-                && (Perso.colisionPerso.Y -30) <= (this.collision.Y ) && (Perso.colisionPerso.Y+64 ) >= (this.collision.Y)
+            if (((Perso._colisionPerso.X -45)<= (this.collision.X ) && (Perso._colisionPerso.X+64 ) >= (this.collision.X)
+                && (Perso._colisionPerso.Y -30) <= (this.collision.Y ) && (Perso._colisionPerso.Y+64 ) >= (this.collision.Y)
                 && Perso.keyboardState.IsKeyDown(Keys.Space)) && _attaquePerso == true && this._estEnVie == true)
             {
                 this._vieMonstre -= 50;
@@ -107,18 +107,18 @@ namespace SAE
             }
 
 
-            if (this.collision.Intersects(Perso.colisionPerso) && this._estEnVie == true && this._attaqueMonstre == true)
+            if (this.collision.Intersects(Perso._colisionPerso) && this._estEnVie == true && this._attaqueMonstre == true)
             {
                 Console.WriteLine("Collision");
-                _compteurAttaqueMonstre = 0;
+                this._compteurAttaqueMonstre = 0;
                 this._attaqueMonstre = false;
                 Perso._viePerso -= 10;
                 Console.WriteLine(Perso._viePerso);
                 
             }
-            if(_compteurAttaqueMonstre >5)
+            if(this._compteurAttaqueMonstre >5)
             {
-                _attaqueMonstre = true;
+                this._attaqueMonstre = true;
             }
            
 
