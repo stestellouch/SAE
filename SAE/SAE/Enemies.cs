@@ -92,12 +92,13 @@ namespace SAE
             ///////////////////////////////////////////////
             if (((Perso.colisionPerso.X -45)<= (this.collision.X ) && (Perso.colisionPerso.X+64 ) >= (this.collision.X)
                 && (Perso.colisionPerso.Y -30) <= (this.collision.Y ) && (Perso.colisionPerso.Y+64 ) >= (this.collision.Y)
-                && Perso.keyboardState.IsKeyDown(Keys.Space)) && _attaquePerso == true)
+                && Perso.keyboardState.IsKeyDown(Keys.Space)) && _attaquePerso == true && this._estEnVie == true)
             {
                 this._vieMonstre -= 50;
                 Console.WriteLine("attaque");
                 _attaquePerso = false;
                 _compteurAttaquePerso = 0;
+                Perso._score = Perso._score + 10;
                 Console.WriteLine(_vieMonstre);
             }
             if(_compteurAttaquePerso > 2)

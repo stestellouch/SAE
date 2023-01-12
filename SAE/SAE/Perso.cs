@@ -69,7 +69,7 @@ namespace SAE
         {
             _sensPersoX = 0;
             _sensPersoY = 0;
-            _positionScore = new Vector2(Camera._cameraPosition.X + 130, Camera._cameraPosition.Y + 130);
+            _positionScore = new Vector2(Camera._cameraPosition.X + 100, Camera._cameraPosition.Y + 130);
             _positionVie = new Vector2(Camera._cameraPosition.X - 280, Camera._cameraPosition.Y + 130);
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
