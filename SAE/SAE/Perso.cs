@@ -38,11 +38,6 @@ namespace SAE
         public static Vector2 _positionScore;
         public static SpriteFont _police;
 
-        public Perso()
-        {
-            
-
-        }
         public static void Initialize()
         {
             //Initialisation des variables
