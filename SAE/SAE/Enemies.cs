@@ -9,14 +9,8 @@ namespace SAE
     {
         public Texture2D _textureEnemy;
         public Vector2 _positionEnemy;
-        //Rectangle fantome;
-        public double _originWidth;
-        public double _originHeight;
         public Texture2D _texture;
         public Vector2 _position;
-        //Rectangle fantome;
-        public double originWidth;
-        public double originHeight;
         public int _vieMonstre;
         public bool _estEnVie;
         public Rectangle collision;
@@ -32,9 +26,6 @@ namespace SAE
         {
             _textureEnemy = newTexture;
             _positionEnemy = newPosition;
-
-            _originWidth = (_textureEnemy.Width / 2);
-            _originHeight = (_textureEnemy.Height / 2);
             _texture = newTexture;
             _position = newPosition;
             _vieMonstre = vie;
@@ -43,13 +34,7 @@ namespace SAE
             _compteurAttaqueMonstre = 0;
             _compteurAttaquePerso = 0;
 
-            
-
-            originWidth = (_texture.Width / 2);
-            originHeight = (_texture.Height / 2);
-
             collision = new Rectangle((int)this._position.X, (int)this._position.Y, 40, 25);
-
         }
 
 
@@ -90,6 +75,9 @@ namespace SAE
             ///////////////////////////////////////////////
             ///                Degats                   ///
             ///////////////////////////////////////////////
+            
+            //Augmente la collision entre notre personnage et le monstre lorsque l'on appuie sur la touche espace
+            //de façon à ce que l'on puisse attaquer le monstre sans que l'on reçoit forcement des dégâts.
             if (((Perso._colisionPerso.X -45)<= (this.collision.X ) && (Perso._colisionPerso.X+64 ) >= (this.collision.X)
                 && (Perso._colisionPerso.Y -30) <= (this.collision.Y ) && (Perso._colisionPerso.Y+64 ) >= (this.collision.Y)
                 && Perso.keyboardState.IsKeyDown(Keys.Space)) && _attaquePerso == true && this._estEnVie == true)
@@ -107,7 +95,8 @@ namespace SAE
                 _attaquePerso = true;
             }
 
-
+            //Permet de détecter la collision entre le personnage et le monstre lorsque l'on appuie sur espace
+            //afin de prendre des dégâts
             if (this.collision.Intersects(Perso._colisionPerso) && this._estEnVie == true && this._attaqueMonstre == true)
             {
                 
@@ -122,15 +111,11 @@ namespace SAE
                 this._attaqueMonstre = true;
             }
            
-
+            //Si le monstre n'a plus de vie il rentre donc dans l'état false de _estEnVie
             if (this._vieMonstre <= 0)
             {
                 this._estEnVie = false;
             }
-
-            //if (Perso.estEnViePerso == false)
-            //    this.
-            
         }
 
 
