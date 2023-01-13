@@ -38,6 +38,9 @@ namespace SAE
         public static Vector2 _positionScore;
         public static SpriteFont _police;
 
+        //son attaque perso
+        public static SoundEffect _sonAttaque;
+
         public static void Initialize()
         {
             //Initialisation des variables
