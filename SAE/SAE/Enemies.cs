@@ -8,9 +8,8 @@ namespace SAE
     public class Enemies
     {
         public Texture2D _textureEnemy;
-        public Vector2 _positionEnemy;
         public Texture2D _texture;
-        public Vector2 _position;
+        public Vector2 _positionMonstre;
         public int _vieMonstre;
         public bool _estEnVie;
         public Rectangle collision;
@@ -25,16 +24,15 @@ namespace SAE
         public Enemies(Texture2D newTexture, Vector2 newPosition, int vie, bool enVie)
         {
             _textureEnemy = newTexture;
-            _positionEnemy = newPosition;
             _texture = newTexture;
-            _position = newPosition;
+            _positionMonstre = newPosition;
             _vieMonstre = vie;
             _estEnVie = enVie;
 
             _compteurAttaqueMonstre = 0;
             _compteurAttaquePerso = 0;
 
-            collision = new Rectangle((int)this._position.X, (int)this._position.Y, 40, 25);
+            collision = new Rectangle((int)this._positionMonstre.X, (int)this._positionMonstre.Y, 40, 25);
         }
 
 
@@ -49,28 +47,28 @@ namespace SAE
 
             float walkSpeed = (float)(deltaTime * (Perso._vitessePerso - 30));
             //Si le monstre est à droite du personnage
-            if (this._position.X+25 >= Perso._positionPerso.X && _estEnVie == true)
+            if (this._positionMonstre.X+25 >= Perso._positionPerso.X && _estEnVie == true)
             {
-                this._position.X -= walkSpeed;
+                this._positionMonstre.X -= walkSpeed;
             }
             //Si le monstre est à gauche du personnage
-            if (this._position.X+25 <= Perso._positionPerso.X && _estEnVie == true)
+            if (this._positionMonstre.X+25 <= Perso._positionPerso.X && _estEnVie == true)
             {
-                this._position.X += walkSpeed;
+                this._positionMonstre.X += walkSpeed;
             }
             //Si le monstre est au dessous du personnage
-            if (this._position.Y+25 >= Perso._positionPerso.Y && _estEnVie == true)
+            if (this._positionMonstre.Y+25 >= Perso._positionPerso.Y && _estEnVie == true)
             {
-                this._position.Y -= walkSpeed;
+                this._positionMonstre.Y -= walkSpeed;
             }
             //Si le monstre est au dessus du personnage            
-            if (this._position.Y+25 <= Perso._positionPerso.Y && _estEnVie == true)
+            if (this._positionMonstre.Y+25 <= Perso._positionPerso.Y && _estEnVie == true)
             {
-                this._position.Y += walkSpeed;
+                this._positionMonstre.Y += walkSpeed;
             }
 
-            this.collision.X = (int)this._position.X+25;
-            this.collision.Y = (int)this._position.Y+35;
+            this.collision.X = (int)this._positionMonstre.X+25;
+            this.collision.Y = (int)this._positionMonstre.Y+35;
 
             ///////////////////////////////////////////////
             ///                Degats                   ///
@@ -121,10 +119,7 @@ namespace SAE
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_textureEnemy, _positionEnemy, Color.White);
-            spriteBatch.Draw(_texture, _position, Color.White);
-
-
+            spriteBatch.Draw(_texture, _positionMonstre, Color.White);
         }
 
     }
