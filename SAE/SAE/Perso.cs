@@ -22,8 +22,6 @@ namespace SAE
         //Création des variables utiles pour le personnage
         public static Vector2 _positionPerso;
         public static AnimatedSprite _Perso;
-        public static int _sensPersoX;
-        public static int _sensPersoY;
         public static float _vitessePerso;
         public static string _sens;
         public static KeyboardState keyboardState;
@@ -45,8 +43,6 @@ namespace SAE
         {
             //Initialisation des variables
             _positionPerso = new Vector2(1300,1300);
-            _sensPersoY = 0;
-            _sensPersoX = 0;
             _vitessePerso = 100;
             _viePerso = 100;
             _sens = "nothing";
@@ -69,8 +65,7 @@ namespace SAE
         }
         public static void Update(GameTime gameTime)
         {
-            _sensPersoX = 0;
-            _sensPersoY = 0;
+            
             
             //Position des textes
             _positionScore = new Vector2(Camera._cameraPosition.X + 100, Camera._cameraPosition.Y + 130);
