@@ -95,7 +95,7 @@ namespace SAE
                 && Perso.keyboardState.IsKeyDown(Keys.Space)) && _attaquePerso == true && this._estEnVie == true)
             {
                 this._vieMonstre -= 50;
-                Console.WriteLine("attaque");
+                
                 _attaquePerso = false;
                 _compteurAttaquePerso = 0;
                 Perso._score = Perso._score + 10;
@@ -110,7 +110,7 @@ namespace SAE
 
             if (this.collision.Intersects(Perso._colisionPerso) && this._estEnVie == true && this._attaqueMonstre == true)
             {
-                Console.WriteLine("Collision");
+                
                 this._compteurAttaqueMonstre = 0;
                 this._attaqueMonstre = false;
                 Perso._viePerso -= 10;
