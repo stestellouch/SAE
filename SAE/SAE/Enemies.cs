@@ -17,7 +17,6 @@ namespace SAE
         public bool _attaqueMonstre;
         public bool _attaquePerso;
 
-        public bool isVisible = true;
 
 
         public Enemies(Texture2D newTexture, Vector2 newPosition, int vie, bool enVie)
