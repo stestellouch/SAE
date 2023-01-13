@@ -7,7 +7,6 @@ namespace SAE
 {
     public class Enemies
     {
-        public Texture2D _textureEnemy;
         public Texture2D _texture;
         public Vector2 _positionMonstre;
         public int _vieMonstre;
@@ -22,8 +21,7 @@ namespace SAE
 
 
         public Enemies(Texture2D newTexture, Vector2 newPosition, int vie, bool enVie)
-        {
-            _textureEnemy = newTexture;
+        { 
             _texture = newTexture;
             _positionMonstre = newPosition;
             _vieMonstre = vie;
