@@ -104,7 +104,9 @@ namespace SAE
                 Console.WriteLine(Perso._viePerso);
                 
             }
-            if(this._compteurAttaqueMonstre >5)
+            //_compteurAttaque un chrono qui se réinitialise à 0 lorsqu’un monstre attaque. Lorsqu’il passe au-dessus de 5 soit 5 secondes, il remet _attaqueMonstre à true.
+            //_attaqueMonstre true passe à false lorsque le monstre a frappé ce qui lui empêche de frapper, il permet donc de déterminer si le monstre peut attaquer ou non. 
+            if (this._compteurAttaqueMonstre >5)
             {
                 this._attaqueMonstre = true;
             }
