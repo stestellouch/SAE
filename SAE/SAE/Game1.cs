@@ -38,8 +38,8 @@ namespace SAE
         //taille écran pour caméra
         public static int _screenHeight;
         public static int _screenWidth;
-
-        private KeyboardState keyboardState, lastKeyboardState;
+            
+        private KeyboardState lastKeyboardState;
 
         public static Texture2D _gameover;
         public Game1()
@@ -120,9 +120,9 @@ namespace SAE
             World.Update(gameTime);
 
             //Quand on appuie sur P ça met la musique en mute (sur pause) ou se ralume
-            keyboardState = Keyboard.GetState();
+            _keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.P) && lastKeyboardState.IsKeyUp(Keys.P))
+            if (_keyboardState.IsKeyDown(Keys.P) && lastKeyboardState.IsKeyUp(Keys.P))
             {
                 
                 if (MediaPlayer.State == MediaState.Paused) 
@@ -130,7 +130,7 @@ namespace SAE
                 else if (MediaPlayer.State == MediaState.Playing) 
                     MediaPlayer.Pause();
             }
-            lastKeyboardState = keyboardState;
+            lastKeyboardState = _keyboardState;
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _keyboardState = Keyboard.GetState();
@@ -151,7 +151,7 @@ namespace SAE
             }
             if(Perso._estEnViePerso == false)
             {
-                if (keyboardState.IsKeyDown(Keys.Enter))
+                if (_keyboardState.IsKeyDown(Keys.Enter))
                 {
                     //foreach (Enemies enemy in _enemies)
                     //    enemy._estEnVie = false;
